@@ -1,6 +1,17 @@
 <html>
 <head>
 
+<style type="text/css">
+body {
+font-family: Arial;
+}
+.button {
+color: white;
+background-color: blue;
+padding: 10px;
+}
+</style>
+
 
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
 <script src="http://connect.soundcloud.com/sdk.js"></script>
@@ -56,6 +67,22 @@ $('#holder_seconds').text(currentPosition.currentPosition/1000); // works
 
 <div id="SCholder">{{ embed_info|safe }}</div>
 <div id="holder_seconds">Position: <span id="sec">test1</span></div>
+<br/><br/><br/>
+<div>
+
+<span id="" class="button">Vocals Unclear</span>
+<span id="" class="button">Bass Unclear</span>
+<span id="" class="button">Mids Unclear</span>
+<span id="" class="button">Treble Unclear</span>
+<span id="" class="button">Go 5 Seconds Back</span>
+
+<span id="" class="button">Go 5 Seconds Forward</span>
+<span id="" class="button">Kick Drum</span>
+<span id="" class="button">Snare Drum</span>
+<span id="" class="button">Section Transition</span>
+<span id="" class="button">Subbass</span>
+
+</div>
 
 </body>
 </html>
