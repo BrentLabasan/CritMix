@@ -21,8 +21,6 @@ font-size: 10px;
 
 $(document).ready(function() {
 
-var position;
-
 var iframeElement   = document.querySelector('iframe');
 //var iframeElementID = iframeElement.id;
 var widget        = SC.Widget(iframeElement);
@@ -54,24 +52,28 @@ widget.bind(SC.Widget.Events.READY, function() {
     });
 
 widget.bind (SC.Widget.Events.PLAY_PROGRESS, function(currentPosition) {
-$('#holder_seconds').text(currentPosition.currentPosition/1000); // works
+var secs = currentPosition.currentPosition/1000 ;
+$('#holder_seconds').text(secs); // works
 //$('#holder_seconds').text( $('.timeIndicator__current').text() ); // span becomes blank
-});
-
-//http://stackoverflow.com/questions/1349404/generate-a-string-of-5-random-characters-in-javascript/8084248#8084248
-// Math.random().toString(36).substr(2, 5)
 
 //http://stackoverflow.com/questions/4416505/how-to-take-keyboard-input-in-javascript/4416533#4416533
 document.addEventListener('keyup', function(event) {
     if(event.keyCode == 65) {
         console.log('Left was pressed');
-        $('#critsHolder').append(position + ' Vocals Unclear');
+        $('#critsHolder').append(secs + ' Vocals Unclear');
     }
     else if(event.keyCode == 83) {
         console.log('Right was pressed');
-        $('#critsHolder').append(position + ' Bass Unclear');
+        $('#critsHolder').append(secs + ' Bass Unclear');
     }
 });
+
+}); // PLAY_PROGRESS
+
+//http://stackoverflow.com/questions/1349404/generate-a-string-of-5-random-characters-in-javascript/8084248#8084248
+// Math.random().toString(36).substr(2, 5)
+
+
 
 });
 
