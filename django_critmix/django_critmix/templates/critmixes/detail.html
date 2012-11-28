@@ -21,6 +21,13 @@ font-size: 10px;
 
 var critList = new Object(); // doesn't work when placed in document.ready, weird!
 
+/*
+0 mix too muddy
+10 bass too muddy 11 mids too muddy 12 treble too muddy
+20 vocals 21 kick 22 snare 23 subbass
+30 transition
+*/
+
 function makeCrit(id, critType, timePosition, comment) {
   console.log(comment);
   $('#critsHolder').append(timePosition + " " + critType + " " + comment + "</br>");
@@ -69,22 +76,37 @@ $('#holder_seconds').text(secs); // works
 
 }); // PLAY_PROGRESS
 
-//http://stackoverflow.com/questions/1349404/generate-a-string-of-5-random-characters-in-javascript/8084248#8084248
-// Math.random().toString(36).substr(2, 5)
 
-document.addEventListener('keyup', function(event) {
+document.addEventListener('keyup', function(event) { //http://stackoverflow.com/questions/1349404/generate-a-string-of-5-random-characters-in-javascript/8084248#8084248
     randomID = Math.random().toString(36).substr(2, 5) ;
     while (critList[randomID]) { // if there's already a Crit with that ID, generate a new randomID
       randomID = Math.random().toString(36).substr(2, 5) ;
     }
     currTime = $('#holder_seconds').text()
-    if(event.keyCode == 65) {
-      // makeCrit(id, critType, timePosition, comment)
-      makeCrit(randomID, 0, currTime, 'Vocals Unclear')
+
+    switch (event.keyCode) {
+      case 65:
+        critType = 20;
+        break;
+      case 83:
+        critType = 10;
+        break;
+      default:
+        
     }
-    else if(event.keyCode == 83) {
-      makeCrit(randomID, 1, currTime, 'Bass Unclear')
+
+    switch (critType) {
+      case 20:
+        // makeCrit(id, critType, timePosition, comment)
+        makeCrit(randomID, 20, currTime, 'Vocals Unclear')
+        break;
+      case 10:
+        makeCrit(randomID, 10, currTime, 'Bass Unclear')
+        break;
+      default:
+        
     }
+
 });
 
 });
