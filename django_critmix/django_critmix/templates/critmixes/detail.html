@@ -9,6 +9,7 @@ font-family: Arial;
 color: white;
 background-color: blue;
 padding: 10px;
+font-size: 10px;
 }
 </style>
 
@@ -19,6 +20,8 @@ padding: 10px;
 <script>
 
 $(document).ready(function() {
+
+var position;
 
 var iframeElement   = document.querySelector('iframe');
 //var iframeElementID = iframeElement.id;
@@ -58,12 +61,15 @@ $('#holder_seconds').text(currentPosition.currentPosition/1000); // works
 //http://stackoverflow.com/questions/1349404/generate-a-string-of-5-random-characters-in-javascript/8084248#8084248
 // Math.random().toString(36).substr(2, 5)
 
+//http://stackoverflow.com/questions/4416505/how-to-take-keyboard-input-in-javascript/4416533#4416533
 document.addEventListener('keyup', function(event) {
     if(event.keyCode == 65) {
         console.log('Left was pressed');
+        $('#critsHolder').append(position + ' Vocals Unclear');
     }
-    else if(event.keyCode == 66) {
+    else if(event.keyCode == 83) {
         console.log('Right was pressed');
+        $('#critsHolder').append(position + ' Bass Unclear');
     }
 });
 
@@ -81,17 +87,17 @@ document.addEventListener('keyup', function(event) {
 <br/><br/><br/>
 <div>
 
-<span id="" class="button">Vocals Unclear</span>
-<span id="" class="button">Bass Unclear</span>
-<span id="" class="button">Mids Unclear</span>
-<span id="" class="button">Treble Unclear</span>
-<span id="" class="button">Go 5 Seconds Back</span>
+<span id="" class="button">(A) Vocals Unclear</span>
+<span id="" class="button">(S) Bass Unclear</span>
+<span id="" class="button">(D) Mids Unclear</span>
+<span id="" class="button">(F) Treble Unclear</span>
+<span id="" class="button">(G) Go 5 Seconds Back</span>
 
-<span id="" class="button">Go 5 Seconds Forward</span>
-<span id="" class="button">Kick Drum</span>
-<span id="" class="button">Snare Drum</span>
-<span id="" class="button">Section Transition</span>
-<span id="" class="button">Subbass</span>
+<span id="" class="button">(H) Go 5 Seconds Forward</span>
+<span id="" class="button">(J) Kick Drum</span>
+<span id="" class="button">(K) Snare Drum</span>
+<span id="" class="button">(L) Section Transition</span>
+<span id="" class="button">(;) Subbass</span>
 
 </div>
 
