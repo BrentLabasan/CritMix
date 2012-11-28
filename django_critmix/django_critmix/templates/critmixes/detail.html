@@ -55,6 +55,17 @@ $('#holder_seconds').text(currentPosition.currentPosition/1000); // works
 //$('#holder_seconds').text( $('.timeIndicator__current').text() ); // span becomes blank
 });
 
+//http://stackoverflow.com/questions/1349404/generate-a-string-of-5-random-characters-in-javascript/8084248#8084248
+// Math.random().toString(36).substr(2, 5)
+
+document.addEventListener('keyup', function(event) {
+    if(event.keyCode == 65) {
+        console.log('Left was pressed');
+    }
+    else if(event.keyCode == 66) {
+        console.log('Right was pressed');
+    }
+});
 
 });
 
@@ -81,6 +92,10 @@ $('#holder_seconds').text(currentPosition.currentPosition/1000); // works
 <span id="" class="button">Snare Drum</span>
 <span id="" class="button">Section Transition</span>
 <span id="" class="button">Subbass</span>
+
+</div>
+
+<div id="critsHolder">
 
 </div>
 
