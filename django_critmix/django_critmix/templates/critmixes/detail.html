@@ -9,6 +9,7 @@ font-family: Arial;
 color: white;
 background-color: blue;
 padding: 10px;
+font-size: 10px;
 }
 </style>
 
@@ -17,6 +18,26 @@ padding: 10px;
 <script src="http://connect.soundcloud.com/sdk.js"></script>
 <script src="http://w.soundcloud.com/player/api.js" type="text/javascript"></script>
 <script>
+
+var critList = new Object(); // doesn't work when placed in document.ready, weird!
+
+/*
+0 mix too muddy
+10 bass too muddy 11 mids too muddy 12 treble too muddy
+20 vocals 21 kick 22 snare 23 subbass
+30 transition
+*/
+
+function makeCrit(id, critType, timePosition, comment) {
+  console.log(comment);
+  $('#critsHolder').append(timePosition + " " + critType + " " + comment + "</br>");
+  critList[randomID] = {
+    id: id,
+    critType: critType,
+    timePosition: timePosition,
+    comment: comment
+  }
+}
 
 $(document).ready(function() {
 
@@ -51,10 +72,47 @@ widget.bind(SC.Widget.Events.READY, function() {
     });
 
 widget.bind (SC.Widget.Events.PLAY_PROGRESS, function(currentPosition) {
-$('#holder_seconds').text(currentPosition.currentPosition/1000); // works
+var secs = currentPosition.currentPosition/1000 ;
+$('#holder_seconds').text(secs); // works
 //$('#holder_seconds').text( $('.timeIndicator__current').text() ); // span becomes blank
-});
 
+//http://stackoverflow.com/questions/4416505/how-to-take-keyboard-input-in-javascript/4416533#4416533
+
+
+}); // PLAY_PROGRESS
+
+
+document.addEventListener('keyup', function(event) { //http://stackoverflow.com/questions/1349404/generate-a-string-of-5-random-characters-in-javascript/8084248#8084248
+    randomID = Math.random().toString(36).substr(2, 5) ;
+    while (critList[randomID]) { // if there's already a Crit with that ID, generate a new randomID
+      randomID = Math.random().toString(36).substr(2, 5) ;
+    }
+    currTime = $('#holder_seconds').text()
+
+    switch (event.keyCode) {
+      case 65:
+        critType = 20;
+        break;
+      case 83:
+        critType = 10;
+        break;
+      default:
+        
+    }
+
+    switch (critType) {
+      case 20:
+        // makeCrit(id, critType, timePosition, comment)
+        makeCrit(randomID, 20, currTime, 'Vocals Unclear')
+        break;
+      case 10:
+        makeCrit(randomID, 10, currTime, 'Bass Unclear')
+        break;
+      default:
+        
+    }
+
+});
 
 });
 
@@ -70,17 +128,21 @@ $('#holder_seconds').text(currentPosition.currentPosition/1000); // works
 <br/><br/><br/>
 <div>
 
-<span id="" class="button">Vocals Unclear</span>
-<span id="" class="button">Bass Unclear</span>
-<span id="" class="button">Mids Unclear</span>
-<span id="" class="button">Treble Unclear</span>
-<span id="" class="button">Go 5 Seconds Back</span>
+<span id="" class="button">(A) Vocals Unclear</span>
+<span id="" class="button">(S) Bass Unclear</span>
+<span id="" class="button">(D) Mids Unclear</span>
+<span id="" class="button">(F) Treble Unclear</span>
+<span id="" class="button">(G) Go 5 Seconds Back</span>
 
-<span id="" class="button">Go 5 Seconds Forward</span>
-<span id="" class="button">Kick Drum</span>
-<span id="" class="button">Snare Drum</span>
-<span id="" class="button">Section Transition</span>
-<span id="" class="button">Subbass</span>
+<span id="" class="button">(H) Go 5 Seconds Forward</span>
+<span id="" class="button">(J) Kick Drum</span>
+<span id="" class="button">(K) Snare Drum</span>
+<span id="" class="button">(L) Section Transition</span>
+<span id="" class="button">(;) Subbass</span>
+
+</div>
+
+<div id="critsHolder">
 
 </div>
 
