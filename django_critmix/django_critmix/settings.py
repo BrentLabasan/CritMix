@@ -117,6 +117,7 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'south',
+    'django_critmix',
     'critmixes',
     # Uncomment the next line to enable the admin:
     'django.contrib.admin',
