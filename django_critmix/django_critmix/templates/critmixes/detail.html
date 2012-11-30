@@ -166,9 +166,9 @@ document.addEventListener('keyup', function(event) { //http://stackoverflow.com/
 */
 
 ///*
-chee = new Date(2010,7,15,0,30);
+chee = new Date(2010,7,15,0,15);
 data.addRows([
-          [new Date(2010,7,15,0,30), , chee.toString()],
+          [new Date(2010,7,15,0,15), , chee.toString()],
         ]);
 //*/
         // specify options
@@ -177,10 +177,10 @@ data.addRows([
           "width":  "100%", 
           "height": "300px", 
           "style": "box",
-          "intervalMin": 86400000,
-          "intervalMax": 86400000,
+          "intervalMin": 1800000,
+          "intervalMax": 1800000,
           "min": new Date(2010, 7, 15,0,0),
-          "max": new Date(2010, 7, 15,1,0),
+          "max": new Date(2010, 7, 15,0,30),
           //"scale": "SCALE.YEAR",
           //"step": "5",
           //"zoomable": true,
@@ -193,7 +193,7 @@ data.addRows([
         timeline.draw(data, options);
         //timeline.deleteAllItems(); // works
         //timeline.setScale(SCALE.MINUTES, 2);
-        timeline.setScale(links.Timeline.StepDate.SCALE.HOUR, 1);
+        timeline.setScale(links.Timeline.StepDate.SCALE.MINUTE, 1);
       }
    </script>
 
