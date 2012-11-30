@@ -36,8 +36,8 @@ var critList = new Object(); // doesn't work when placed in document.ready, weir
 */
 
 function makeCrit(id, critType, timePosition, comment) {
-  console.log(comment);
-  $('#critsHolder').append(timePosition + " " + critType + " " + comment + "</br>");
+  //$('#critsHolder').append(timePosition + " " + critType + " " + comment + "</br>");
+  console.log(timePosition + " " + critType + " " + comment);
   critList[randomID] = {
     id: id,
     critType: critType,
