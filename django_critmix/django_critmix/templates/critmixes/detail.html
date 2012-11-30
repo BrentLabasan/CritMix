@@ -167,7 +167,7 @@ document.addEventListener('keyup', function(event) { //http://stackoverflow.com/
 
 ///*
 data.addRows([
-          [new Date(2010,7,23), , 'Conversation<br>' + 
+          [new Date(2012,7,23), , 'Conversation<br>' + 
             '<img src="img/comments-icon.png" style="width:32px; height:32px;">'],
         ]);
 //*/
@@ -177,9 +177,12 @@ data.addRows([
           "width":  "100%", 
           "height": "300px", 
           "style": "box",
-          "scale": "SCALE.YEAR",
-          "step": "5",
-          "zoomable": true,
+          "intervalmax": 2600,
+          "min": new Date(2011, 7, 15),
+          "max": new Date(2013, 7, 15),
+          //"scale": "SCALE.YEAR",
+          //"step": "5",
+          //"zoomable": true,
         };
 
         // Instantiate our timeline object.
@@ -189,7 +192,7 @@ data.addRows([
         timeline.draw(data, options);
         //timeline.deleteAllItems(); // works
         //timeline.setScale(SCALE.MINUTES, 2);
-        timeline.setScale(links.Timeline.StepDate.SCALE.MINUTE, 60);
+        timeline.setScale(links.Timeline.StepDate.SCALE.YEAR, 1);
       }
    </script>
 
