@@ -27,7 +27,7 @@ font-size: 10px;
 <script type="text/javascript">
 
 var critList = new Object(); // doesn't work when placed in document.ready, weird!
-var dura ;
+var dura = 0 ;
 /*
 0 mix too muddy
 10 bass too muddy 11 mids too muddy 12 treble too muddy
@@ -47,6 +47,7 @@ function makeCrit(id, critType, timePosition, comment) {
 }
 
 $(document).ready(function() {
+var dura = 0 ;
 
 var iframeElement   = document.querySelector('iframe');
 //var iframeElementID = iframeElement.id;
@@ -59,33 +60,38 @@ console.log(widget);
 
 
 widget.bind(SC.Widget.Events.READY, function() {
-      console.log(SC.Widget.Events.PLAY_PROGRESS.currentPosition);
-      widget.bind(SC.Widget.Events.PLAY, function() {
-        // get information about currently playing sound
-        widget.getCurrentSound(function(currentSound) { 
-          console.log('sound ' + currentSound.get('') + 'began to play');
-        });
-      });
-      // get current level of volume
-      widget.getVolume(function(volume) {
-        console.log('current volume value is ' + volume);
-      });
-      // set new volume level
-      widget.setVolume(50);
-      // get the value of the current position
-       widget.getPosition(function(position) {
-        console.log('current position value is ' + position);
-        $('#holder_seconds').text(position);
-      });
-       dura = widget.getDuration(function(duration) {
-        dura = duration ;
-        console.log('current duration value is ' + dura);
-        
-        
-      });
+
+  console.log(SC.Widget.Events.PLAY_PROGRESS.currentPosition);
+
+  widget.bind(SC.Widget.Events.PLAY, function() {
+    // get information about currently playing sound
+    widget.getCurrentSound(function(currentSound) { 
+      console.log('sound ' + currentSound.get('') + 'began to play');
+    });
+  });
+
+  // get current level of volume
+  widget.getVolume(function(volume) {
+    console.log('current volume value is ' + volume);
+  });
+
+  // set new volume level
+  widget.setVolume(50);
+
+  // get the value of the current position
+   widget.getPosition(function(position) {
+    console.log('current position value is ' + position);
+    $('#holder_seconds').text(position);
+  });
+
+  dura = widget.getDuration(function(duration) {
+    dura = duration ;
+    console.log('current duration value is ' + dura); 
+  });
+
 });
 
-widget.bind (SC.Widget.Events.PLAY_PROGRESS, function(currentPosition) {
+widget.bind(SC.Widget.Events.PLAY_PROGRESS, function(currentPosition) {
 var secs = currentPosition.currentPosition/1000 ;
 $('#holder_seconds').text(secs); // works
 //$('#holder_seconds').text( $('.timeIndicator__current').text() ); // span becomes blank
