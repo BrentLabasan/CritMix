@@ -200,6 +200,7 @@ $('#holder_seconds').text(secs); // works
 }); // PLAY_PROGRESS
 
 document.addEventListener('keyup', function(event) { //http://stackoverflow.com/questions/1349404/generate-a-string-of-5-random-characters-in-javascript/8084248#8084248
+  console.log("event.keyCode " + event.keyCode)
     randomID = Math.random().toString(36).substr(2, 5) ;
     while (critList[randomID]) { // if there's already a Crit with that ID, generate a new randomID
       randomID = Math.random().toString(36).substr(2, 5) ;
@@ -214,7 +215,8 @@ document.addEventListener('keyup', function(event) { //http://stackoverflow.com/
         critType = 10;
         break;
       default:
-        
+        return false;
+        break;
     }
 
     switch (critType) {
@@ -226,6 +228,8 @@ document.addEventListener('keyup', function(event) { //http://stackoverflow.com/
         makeCrit(randomID, 10, currTime, 'Bass Unclear')
         break;
       default:
+        return false;
+        break;
         
     }
 });
