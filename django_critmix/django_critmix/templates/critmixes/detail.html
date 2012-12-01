@@ -9,13 +9,19 @@ font-family: Arial;
 .button {
 color: white;
 background-color: blue;
-padding: 10px;
+
 font-size: 13px;
 font-weight: bold;
 
 }
 #mytimeline {
   margin:20px;
+}
+#critButtons li{
+  display: inline;
+list-style-type: none;
+
+padding: 10px;
 }
 </style>
 
@@ -53,8 +59,8 @@ function makeCrit(id, critType, timePosition, comment) {
 
 
 
-//$(".critType" + critType).effect("highlight");
-$(".critType" + critType).effect("bounce");
+$(".critType" + critType).effect("highlight");
+//$(".critType" + critType).effect("bounce"); // looks whack
 
 var props = {
 'start': new Date(2012,5,2,0,0,timePosition),
@@ -242,17 +248,19 @@ document.addEventListener('keyup', function(event) { //http://stackoverflow.com/
 <br/><br/><br/>
 <div>
 
-<span id="" class="button critType20">(A) Vocals Unclear</span>
-<span id="" class="button critType10">(S) Bass Unclear</span>
-<span id="" class="button">(D) Mids Unclear</span>
-<span id="" class="button">(F) Treble Unclear</span>
-<span id="" class="button">(G) Go 5 Seconds Back</span>
+<ul id="critButtons">
+<li id="" class="button critType20">(A) Vocals Unclear</li>
+<li id="" class="button critType10">(S) Bass Unclear</li>
+<li id="" class="button">(D) Mids Unclear</li>
+<li id="" class="button">(F) Treble Unclear</li>
+<li id="" class="button">(G) Go 5 Seconds Back</li>
 
-<span id="" class="button">(H) Go 5 Seconds Forward</span>
-<span id="" class="button">(J) Kick Drum</span>
-<span id="" class="button">(K) Snare Drum</span>
-<span id="" class="button">(L) Section Transition</span>
-<span id="" class="button">(;) Subbass</span>
+<li id="" class="button">(H) Go 5 Seconds Forward</li>
+<li id="" class="button">(J) Kick Drum</li>
+<li id="" class="button">(K) Snare Drum</li>
+<li id="" class="button">(L) Section Transition</li>
+<li id="" class="button">(;) Subbass</li>
+</ul>
 
 </div>
 
