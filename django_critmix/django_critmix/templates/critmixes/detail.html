@@ -27,7 +27,7 @@ font-size: 10px;
 <script type="text/javascript">
 
 var critList = new Object(); // doesn't work when placed in document.ready, weird!
-var dura = 0 ;
+var rud ;
 /*
 0 mix too muddy
 10 bass too muddy 11 mids too muddy 12 treble too muddy
@@ -47,7 +47,6 @@ function makeCrit(id, critType, timePosition, comment) {
 }
 
 $(document).ready(function() {
-var dura = 0 ;
 
 var iframeElement   = document.querySelector('iframe');
 //var iframeElementID = iframeElement.id;
@@ -84,12 +83,69 @@ widget.bind(SC.Widget.Events.READY, function() {
     $('#holder_seconds').text(position);
   });
 
-  dura = widget.getDuration(function(duration) {
-    dura = duration ;
-    console.log('current duration value is ' + dura); 
-  });
+
+rud = widget.getDuration(function(duration, rud) {
+  rud = duration ;
+  console.log('current duration value is ' + rud); 
+  return duration ;
+});
+console.log("rud1 " + rud);
+//console.log("rud1 " +  widget.getDuration()  );
+
 
 });
+
+
+
+ var timeline;
+      
+      //google.load("visualization", "1");
+      
+      // Set callback to run when API is loaded
+      google.setOnLoadCallback(drawVisualization); 
+
+      // Called when the Visualization API is loaded.
+      function drawVisualization() {
+
+        var data = [];
+        console.log("rud2 " + rud);
+chee = new Date(2012,5,2,0,0,30);
+data.push({
+  'start': new Date(2012,5,2,0,0,30),
+  //'end': new Date(2010, 8, 2),  // end is optional
+  'content': chee
+  // Optional: a parameter 'group'
+  // Optional: a parameter 'className'
+});
+
+        // specify options
+        // Date(year, month, day, hours, minutes, seconds, milliseconds)
+        var options = {
+          "editable": true,
+          "width":  "100%", 
+          "height": "300px", 
+          "style": "box",
+          "intervalMin": {{ duration }},
+          "intervalMax": {{ duration }},
+          "min": new Date(2012, 5, 2,0,0), // 
+          "max": new Date(2012, 5, 2,0,1),
+          //"scale": "SCALE.YEAR",
+          //"step": "5",
+          //"zoomable": true,
+        };
+
+        // Instantiate our timeline object.
+        timeline = new links.Timeline(document.getElementById('mytimeline'));
+        
+        // Draw our timeline with the created data and options 
+        timeline.draw(data, options);
+        //timeline.deleteAllItems(); // works
+        //timeline.setScale(SCALE.MINUTES, 2);
+        timeline.setScale(links.Timeline.StepDate.SCALE.SECOND, 10);
+       
+      }
+
+
 
 widget.bind(SC.Widget.Events.PLAY_PROGRESS, function(currentPosition) {
 var secs = currentPosition.currentPosition/1000 ;
@@ -128,56 +184,7 @@ document.addEventListener('keyup', function(event) { //http://stackoverflow.com/
     }
 });
 
-var timeline;
-      
-      //google.load("visualization", "1");
-      
-      // Set callback to run when API is loaded
-      google.setOnLoadCallback(drawVisualization); 
 
-      // Called when the Visualization API is loaded.
-      function drawVisualization() {
-
-        var data = [];
-chee = new Date(2012,5,2,0,0,30);
-data.push({
-  'start': new Date(2012,5,2,0,0,30),
-  //'end': new Date(2010, 8, 2),  // end is optional
-  'content': chee
-  // Optional: a parameter 'group'
-  // Optional: a parameter 'className'
-});
-
-///*
- console.log("dur dur " + dura)
-
-//*/
-        // specify options
-        // Date(year, month, day, hours, minutes, seconds, milliseconds)
-        var options = {
-          "editable": true,
-          "width":  "100%", 
-          "height": "300px", 
-          "style": "box",
-          "intervalMin": 1800000,
-          "intervalMax": 1800000,
-          "min": new Date(2012, 5, 2,0,0), // 
-          "max": new Date(2012, 5, 2,0,1),
-          //"scale": "SCALE.YEAR",
-          //"step": "5",
-          //"zoomable": true,
-        };
-
-        // Instantiate our timeline object.
-        timeline = new links.Timeline(document.getElementById('mytimeline'));
-        
-        // Draw our timeline with the created data and options 
-        timeline.draw(data, options);
-        //timeline.deleteAllItems(); // works
-        //timeline.setScale(SCALE.MINUTES, 2);
-        timeline.setScale(links.Timeline.StepDate.SCALE.SECOND, 10);
-       
-      }
 
 }); // .ready
 
