@@ -13,10 +13,12 @@ def detail(request, critmix_id):
     # get a tracks oembed data
     track_url = p
     print track_url
-    embed_info = client.get('/oembed', url=track_url)
+    embed_info = client.get('/oembed', url=track_url, show_comments='false')
     # print the html for the player widget
     print embed_info.html
-    return render_to_response('critmixes/detail.html', {'critmix': p, 'embed_info': embed_info.html})
+    track = client.get('/resolve', url=track_url)
+    print 'duration', track.duration
+    return render_to_response('critmixes/detail.html', {'critmix': p, 'embed_info': embed_info.html, 'duration': track.duration})
 
 def results(request, critmix_id):
     return HttpResponse("You're looking at the results of critmix %s." % critmix_id)
