@@ -185,7 +185,7 @@ data.push({
         //timeline.deleteAllItems(); // works
         //timeline.setScale(SCALE.MINUTES, 2);
         timeline.setScale(links.Timeline.StepDate.SCALE.SECOND, 15);
-        timeline.setCustomTime(new Date(2012,5,2,0,3,27));
+
        
       }
 
@@ -194,6 +194,7 @@ data.push({
 widget.bind(SC.Widget.Events.PLAY_PROGRESS, function(currentPosition) {
 var secs = currentPosition.currentPosition/1000 ;
 $('#holder_seconds').text(secs); // works
+timeline.setCustomTime(new Date(2012,5,2,0,0,0,currentPosition.currentPosition));
 //$('#holder_seconds').text( $('.timeIndicator__current').text() ); // span becomes blank
 }); // PLAY_PROGRESS
 
