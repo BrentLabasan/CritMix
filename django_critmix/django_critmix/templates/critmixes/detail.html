@@ -10,7 +10,12 @@ font-family: Arial;
 color: white;
 background-color: blue;
 padding: 10px;
-font-size: 10px;
+font-size: 13px;
+font-weight: bold;
+
+}
+#mytimeline {
+  margin:20px;
 }
 </style>
 
@@ -109,6 +114,7 @@ console.log("rud1 " + rud);
 
         var data = [];
         console.log("rud2 " + rud);
+
 chee = new Date(2012,5,2,0,0,30);
 data.push({
   'start': new Date(2012,5,2,0,0,30),
@@ -118,9 +124,29 @@ data.push({
   // Optional: a parameter 'className'
 });
 
+chee1 = new Date(2012,5,2,0,1,45);
+data.push({
+  'start': new Date(2012,5,2,0,1,45),
+  //'end': new Date(2010, 8, 2),  // end is optional
+  'content': chee1 + "<br/>Criticism #2"
+  // Optional: a parameter 'group'
+  // Optional: a parameter 'className'
+});
+
+chee2 = new Date(2012,5,2,0,2,0);
+data.push({
+  'start': new Date(2012,5,2,0,2,0),
+  //'end': new Date(2010, 8, 2),  // end is optional
+  'content': chee2 + "<br/>Criticism #3"
+  // Optional: a parameter 'group'
+  // Optional: a parameter 'className'
+});
+
+
         // specify options
         // Date(year, month, day, hours, minutes, seconds, milliseconds)
         var options = {
+          "axisOnTop": true,
           "editable": true,
           "width":  "100%", 
           "height": "300px", 
@@ -141,7 +167,7 @@ data.push({
         timeline.draw(data, options);
         //timeline.deleteAllItems(); // works
         //timeline.setScale(SCALE.MINUTES, 2);
-        timeline.setScale(links.Timeline.StepDate.SCALE.MINUTE, 1);
+        timeline.setScale(links.Timeline.StepDate.SCALE.SECOND, 15);
        
       }
 
