@@ -30,7 +30,7 @@ font-weight: bold;
 <link rel="stylesheet" type="text/css" href="{% static "timeline-2.3.2/timeline.css" %}">
 
 <script type="text/javascript">
-
+var timeline;
 var critList = new Object(); // doesn't work when placed in document.ready, weird!
 var rud ;
 /*
@@ -40,7 +40,7 @@ var rud ;
 30 transition
 */
 
-function makeCrit(id, critType, timePosition, comment, timeline) {
+function makeCrit(id, critType, timePosition, comment) {
   //$('#critsHolder').append(timePosition + " " + critType + " " + comment + "</br>");
   console.log(timePosition + " " + critType + " " + comment);
   critList[randomID] = {
@@ -111,7 +111,7 @@ console.log("rud1 " + rud);
 
 
 
- var timeline;
+ 
       
       //google.load("visualization", "1");
       
@@ -209,7 +209,7 @@ document.addEventListener('keyup', function(event) { //http://stackoverflow.com/
     switch (critType) {
       case 20:
         // makeCrit(id, critType, timePosition, comment)
-        makeCrit(randomID, 20, currTime, 'Vocals Unclear', timeline)
+        makeCrit(randomID, 20, currTime, 'Vocals Unclear')
         break;
       case 10:
         makeCrit(randomID, 10, currTime, 'Bass Unclear')
