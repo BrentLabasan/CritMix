@@ -113,7 +113,7 @@ chee = new Date(2012,5,2,0,0,30);
 data.push({
   'start': new Date(2012,5,2,0,0,30),
   //'end': new Date(2010, 8, 2),  // end is optional
-  'content': chee
+  'content': chee + "<br/>Criticism #1"
   // Optional: a parameter 'group'
   // Optional: a parameter 'className'
 });
@@ -127,8 +127,8 @@ data.push({
           "style": "box",
           "intervalMin": {{ duration }},
           "intervalMax": {{ duration }},
-          "min": new Date(2012, 5, 2,0,0), // 
-          "max": new Date(2012, 5, 2,0,1),
+          "min": new Date(2012, 5, 2,0,0,0), // 
+          "max": new Date(2012, 5, 2,0,0,{{ duration }}/1000),
           //"scale": "SCALE.YEAR",
           //"step": "5",
           //"zoomable": true,
@@ -141,7 +141,7 @@ data.push({
         timeline.draw(data, options);
         //timeline.deleteAllItems(); // works
         //timeline.setScale(SCALE.MINUTES, 2);
-        timeline.setScale(links.Timeline.StepDate.SCALE.SECOND, 10);
+        timeline.setScale(links.Timeline.StepDate.SCALE.MINUTE, 1);
        
       }
 
