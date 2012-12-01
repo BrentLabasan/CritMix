@@ -121,10 +121,6 @@ console.log("rud1 " + rud);
 
 });
 
-
-
- 
-      
       //google.load("visualization", "1");
       
       // Set callback to run when API is loaded
@@ -175,6 +171,7 @@ data.push({
           "intervalMax": {{ duration }},
           "min": new Date(2012, 5, 2,0,0,0), // 
           "max": new Date(2012, 5, 2,0,0,{{ duration }}/1000),
+          "showCustomTime": true
           //"scale": "SCALE.YEAR",
           //"step": "5",
           //"zoomable": true,
@@ -188,6 +185,7 @@ data.push({
         //timeline.deleteAllItems(); // works
         //timeline.setScale(SCALE.MINUTES, 2);
         timeline.setScale(links.Timeline.StepDate.SCALE.SECOND, 15);
+        timeline.setCustomTime(new Date(2012,5,2,0,3,27));
        
       }
 
