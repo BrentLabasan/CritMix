@@ -51,14 +51,14 @@ function makeCrit(id, critType, timePosition, comment) {
   }
 
 var props = {
-'start': new Date(2012,5,2,0,1,0),
+'start': new Date(2012,5,2,0,0,timePosition),
 'content': comment
 };
 
   timeline.addItem(props); // properties is an Object, containing parameters start (Date), end (Date), content (String), group (String). Parameters end and group are optional.
 
 
-} //makeCrit
+} //func makeCrit
 
 $(document).ready(function() {
 
