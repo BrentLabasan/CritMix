@@ -49,7 +49,12 @@ function makeCrit(id, critType, timePosition, comment) {
     critType: critType,
     timePosition: timePosition,
     comment: comment
-  }
+  } 
+
+
+
+//$(".critType" + critType).effect("highlight");
+$(".critType" + critType).effect("bounce");
 
 var props = {
 'start': new Date(2012,5,2,0,0,timePosition),
@@ -237,8 +242,8 @@ document.addEventListener('keyup', function(event) { //http://stackoverflow.com/
 <br/><br/><br/>
 <div>
 
-<span id="" class="button">(A) Vocals Unclear</span>
-<span id="" class="button">(S) Bass Unclear</span>
+<span id="" class="button critType20">(A) Vocals Unclear</span>
+<span id="" class="button critType10">(S) Bass Unclear</span>
 <span id="" class="button">(D) Mids Unclear</span>
 <span id="" class="button">(F) Treble Unclear</span>
 <span id="" class="button">(G) Go 5 Seconds Back</span>
