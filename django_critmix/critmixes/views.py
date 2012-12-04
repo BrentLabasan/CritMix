@@ -38,8 +38,9 @@ def savecrits(request):
             txt = GET[u'jsonData']
             critmix = Critmix.objects.get(pk=pk)
             critmix.jsonData = txt
+            critmix.save()
             print "HIYOOOOOOO"
-            print critmix.jsonData
+            #print critmix.jsonData
             results = {'success':True}
     json = simplejson.dumps(results)
     return HttpResponse(json, mimetype='application/json')
