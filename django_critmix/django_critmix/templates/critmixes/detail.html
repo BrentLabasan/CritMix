@@ -43,6 +43,27 @@ padding: 10px;
 <link rel="stylesheet" type="text/css" href="{% static "timeline-2.3.2/timeline.css" %}">
 
 <script type="text/javascript">
+///*
+function savecrits(txt) {
+  
+  $.getJSON("/savecrits/", { pk:9, jsonData: txt }, function(json){
+    alert("Was successful?: " + json['success']);
+  });
+}
+//*/
+
+///*
+function addClickHandlers() {
+  $("#button_save").click( function() { 
+    savecrits("qwe");
+  });
+}
+//*/
+
+///*
+$(document).ready(addClickHandlers);
+//*/
+
 var timeline;
 var critList = new Object(); // doesn't work when placed in document.ready, weird!
 var rud ;
