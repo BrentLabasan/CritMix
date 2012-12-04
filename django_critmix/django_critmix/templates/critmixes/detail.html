@@ -129,13 +129,11 @@ console.log("rud1 " + rud);
 
       // Called when the Visualization API is loaded.
       function drawVisualization() {
-
-        var data = [];
-
 chee = new Date(2012,5,1,0,0);
-data.push({
-  {{ jsonData|safe }}
-});
+        var data = [ {{ jsonData|safe }} ];
+
+
+
 //alert("{{ jsonData|safe }}");
 /*
 chee1 = new Date(2012,5,2,0,1,45);
