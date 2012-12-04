@@ -43,10 +43,10 @@ padding: 10px;
 <link rel="stylesheet" type="text/css" href="{% static "timeline-2.3.2/timeline.css" %}">
 
 <script type="text/javascript">
+
 ///*
 function savecrits(txt) {
-  
-  $.getJSON("/savecrits/", { pk:9, jsonData: txt }, function(json){
+  $.getJSON("/savecrits/", { pk:{{ critmixID }}, jsonData: txt }, function(json){
     alert("Was successful?: " + json['success']);
   });
 }
