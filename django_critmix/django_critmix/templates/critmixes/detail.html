@@ -46,9 +46,7 @@ padding: 10px;
 
 ///*
 function savecrits(txt) {
-  $.getJSON("/savecrits/", { pk:{{ critmixID }}, jsonData: txt }, function(json){
-    alert("Was successful?: " + json['success']);
-  });
+  $.getJSON("/savecrits/", { pk:{{ critmixID }}, jsonData: txt });
 }
 //*/
 
