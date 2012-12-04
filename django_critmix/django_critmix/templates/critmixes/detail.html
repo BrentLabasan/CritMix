@@ -9,7 +9,7 @@ font-family: Arial;
 .button {
 color: white;
 background-color: blue;
-padding: 10px;
+
 font-size: 13px;
 font-weight: bold;
 
@@ -17,10 +17,23 @@ font-weight: bold;
 #mytimeline {
   margin:20px;
 }
+#critButtons li{
+  display: inline;
+list-style-type: none;
+
+padding: 10px;
+}
+
+#button_save {
+  color:white;
+  background-color: red;
+  font-weight: bold;
+}
 </style>
 
 
-<script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+<script src="http:////ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+<script src="http://code.jquery.com/ui/1.9.2/jquery-ui.js"></script>
 <!-- SoundCloud -->
 <script src="http://connect.soundcloud.com/sdk.js"></script>
 <script src="http://w.soundcloud.com/player/api.js" type="text/javascript"></script>
@@ -30,9 +43,10 @@ font-weight: bold;
 <link rel="stylesheet" type="text/css" href="{% static "timeline-2.3.2/timeline.css" %}">
 
 <script type="text/javascript">
-
+var timeline;
 var critList = new Object(); // doesn't work when placed in document.ready, weird!
 var rud ;
+
 /*
 0 mix too muddy
 10 bass too muddy 11 mids too muddy 12 treble too muddy
@@ -48,8 +62,22 @@ function makeCrit(id, critType, timePosition, comment) {
     critType: critType,
     timePosition: timePosition,
     comment: comment
-  }
-}
+  } 
+
+
+
+$(".critType" + critType).effect("highlight");
+//$(".critType" + critType).effect("bounce"); // looks whack
+
+var props = {
+'start': new Date(2012,5,2,0,0,timePosition),
+'content': comment
+};
+
+  timeline.addItem(props); // properties is an Object, containing parameters start (Date), end (Date), content (String), group (String). Parameters end and group are optional.
+
+
+} //func makeCrit
 
 $(document).ready(function() {
 
@@ -100,10 +128,6 @@ console.log("rud1 " + rud);
 
 });
 
-
-
- var timeline;
-      
       //google.load("visualization", "1");
       
       // Set callback to run when API is loaded
@@ -111,19 +135,13 @@ console.log("rud1 " + rud);
 
       // Called when the Visualization API is loaded.
       function drawVisualization() {
+chee = new Date(2012,5,1,0,0);
+        var data = [ {{ jsonData|safe }} ];
 
-        var data = [];
-        console.log("rud2 " + rud);
 
-chee = new Date(2012,5,2,0,0,30);
-data.push({
-  'start': new Date(2012,5,2,0,0,30),
-  //'end': new Date(2010, 8, 2),  // end is optional
-  'content': chee + "<br/>Criticism #1"
-  // Optional: a parameter 'group'
-  // Optional: a parameter 'className'
-});
 
+//alert("{{ jsonData|safe }}");
+/*
 chee1 = new Date(2012,5,2,0,1,45);
 data.push({
   'start': new Date(2012,5,2,0,1,45),
@@ -141,7 +159,7 @@ data.push({
   // Optional: a parameter 'group'
   // Optional: a parameter 'className'
 });
-
+*/
 
         // specify options
         // Date(year, month, day, hours, minutes, seconds, milliseconds)
@@ -155,6 +173,8 @@ data.push({
           "intervalMax": {{ duration }},
           "min": new Date(2012, 5, 2,0,0,0), // 
           "max": new Date(2012, 5, 2,0,0,{{ duration }}/1000),
+          "showCustomTime": true,
+          "boxAlign": "left"
           //"scale": "SCALE.YEAR",
           //"step": "5",
           //"zoomable": true,
@@ -168,6 +188,7 @@ data.push({
         //timeline.deleteAllItems(); // works
         //timeline.setScale(SCALE.MINUTES, 2);
         timeline.setScale(links.Timeline.StepDate.SCALE.SECOND, 15);
+
        
       }
 
@@ -176,10 +197,12 @@ data.push({
 widget.bind(SC.Widget.Events.PLAY_PROGRESS, function(currentPosition) {
 var secs = currentPosition.currentPosition/1000 ;
 $('#holder_seconds').text(secs); // works
+timeline.setCustomTime(new Date(2012,5,2,0,0,0,currentPosition.currentPosition));
 //$('#holder_seconds').text( $('.timeIndicator__current').text() ); // span becomes blank
 }); // PLAY_PROGRESS
 
 document.addEventListener('keyup', function(event) { //http://stackoverflow.com/questions/1349404/generate-a-string-of-5-random-characters-in-javascript/8084248#8084248
+  console.log("event.keyCode " + event.keyCode)
     randomID = Math.random().toString(36).substr(2, 5) ;
     while (critList[randomID]) { // if there's already a Crit with that ID, generate a new randomID
       randomID = Math.random().toString(36).substr(2, 5) ;
@@ -194,7 +217,8 @@ document.addEventListener('keyup', function(event) { //http://stackoverflow.com/
         critType = 10;
         break;
       default:
-        
+        return false;
+        break;
     }
 
     switch (critType) {
@@ -206,6 +230,8 @@ document.addEventListener('keyup', function(event) { //http://stackoverflow.com/
         makeCrit(randomID, 10, currTime, 'Bass Unclear')
         break;
       default:
+        return false;
+        break;
         
     }
 });
@@ -221,24 +247,26 @@ document.addEventListener('keyup', function(event) { //http://stackoverflow.com/
 </head>
 <body>
 
-<h1>{{ critmix }}</h1>
+<h1>{{ critmix.mix_url }}</h1>
 
 <div id="SCholder">{{ embed_info|safe }}</div>
 <div id="holder_seconds">Position: <span id="sec">test1</span></div>
 <br/><br/><br/>
 <div>
 
-<span id="" class="button">(A) Vocals Unclear</span>
-<span id="" class="button">(S) Bass Unclear</span>
-<span id="" class="button">(D) Mids Unclear</span>
-<span id="" class="button">(F) Treble Unclear</span>
-<span id="" class="button">(G) Go 5 Seconds Back</span>
+<ul id="critButtons">
+<li id="" class="button critType20">(A) Vocals Unclear</li>
+<li id="" class="button critType10">(S) Bass Unclear</li>
+<li id="" class="button">(D) Mids Unclear</li>
+<li id="" class="button">(F) Treble Unclear</li>
+<li id="" class="button">(G) Go 5 Seconds Back</li>
 
-<span id="" class="button">(H) Go 5 Seconds Forward</span>
-<span id="" class="button">(J) Kick Drum</span>
-<span id="" class="button">(K) Snare Drum</span>
-<span id="" class="button">(L) Section Transition</span>
-<span id="" class="button">(;) Subbass</span>
+<li id="" class="button">(H) Go 5 Seconds Forward</li>
+<li id="" class="button">(J) Kick Drum</li>
+<li id="" class="button">(K) Snare Drum</li>
+<li id="" class="button">(L) Section Transition</li>
+<li id="" class="button">(;) Subbass</li>
+</ul>
 
 </div>
 
@@ -247,6 +275,8 @@ document.addEventListener('keyup', function(event) { //http://stackoverflow.com/
 </div>
 
 <div id="mytimeline"></div>
+
+<span id="button_save">SAVE</span>
 
 </body>
 </html>
