@@ -5,6 +5,7 @@ import soundcloud
 client = soundcloud.Client(client_id='4d9fea6bff39bf127b10e87a2f478aea')
 from django.utils.safestring import mark_safe
 from django.http import HttpResponse, HttpResponseRedirect
+from django.utils import simplejson
 
 def index(request):
     latest_critmix_list = Critmix.objects.all()
@@ -39,8 +40,8 @@ def savecrits(request):
             critmix = Critmix.objects.get(pk=pk)
             critmix.jsonData = txt
             critmix.save()
-            print "HIYOOOOOOO"
             #print critmix.jsonData
             results = {'success':True}
     json = simplejson.dumps(results)
+    print "HIYOOOOOOO", json
     return HttpResponse(json, mimetype='application/json')
