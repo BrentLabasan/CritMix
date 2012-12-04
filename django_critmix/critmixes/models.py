@@ -7,8 +7,8 @@ class Critmix(models.Model):
   #pub_date = models.DateTimeField('date published')
   jsonData = models.TextField(default="{'start': new Date(2012,5,1,0,0),'content': chee + '<br/>Criticism #1'}")
 
-  def __unicode__(self):
-    return self.mix_url
+ # def __unicode__(self):
+ #   return self.mix_url
 
 class Crit(models.Model):
   critmix = models.ForeignKey(Critmix)

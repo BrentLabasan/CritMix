@@ -40,6 +40,7 @@ padding: 10px;
 var timeline;
 var critList = new Object(); // doesn't work when placed in document.ready, weird!
 var rud ;
+
 /*
 0 mix too muddy
 10 bass too muddy 11 mids too muddy 12 treble too muddy
@@ -133,9 +134,9 @@ console.log("rud1 " + rud);
 
 chee = new Date(2012,5,1,0,0);
 data.push({
-  'start': new Date(2012,5,1,0,0),
-  'content': chee + '<br/>Criticism #1'
+  {{ jsonData|safe }}
 });
+//alert("{{ jsonData|safe }}");
 /*
 chee1 = new Date(2012,5,2,0,1,45);
 data.push({
@@ -242,7 +243,8 @@ document.addEventListener('keyup', function(event) { //http://stackoverflow.com/
 </head>
 <body>
 
-<h1>{{ critmix }}</h1>
+<h1>{{ critmix.mix_url }}</h1>
+<h3>{{ jsonData }}</h3>
 
 <div id="SCholder">{{ embed_info|safe }}</div>
 <div id="holder_seconds">Position: <span id="sec">test1</span></div>
