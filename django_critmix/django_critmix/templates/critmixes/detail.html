@@ -23,6 +23,12 @@ list-style-type: none;
 
 padding: 10px;
 }
+
+#button_save {
+  color:white;
+  background-color: red;
+  font-weight: bold;
+}
 </style>
 
 
@@ -242,7 +248,6 @@ document.addEventListener('keyup', function(event) { //http://stackoverflow.com/
 <body>
 
 <h1>{{ critmix.mix_url }}</h1>
-<h3>{{ jsonData }}</h3>
 
 <div id="SCholder">{{ embed_info|safe }}</div>
 <div id="holder_seconds">Position: <span id="sec">test1</span></div>
@@ -270,6 +275,8 @@ document.addEventListener('keyup', function(event) { //http://stackoverflow.com/
 </div>
 
 <div id="mytimeline"></div>
+
+<span id="button_save">SAVE</span>
 
 </body>
 </html>
