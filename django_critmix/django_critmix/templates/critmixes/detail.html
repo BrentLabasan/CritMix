@@ -43,6 +43,38 @@ padding: 10px;
 <link rel="stylesheet" type="text/css" href="{% static "timeline-2.3.2/timeline.css" %}">
 
 <script type="text/javascript">
+
+///*
+function savecrits(txt) {
+  $.getJSON("/savecrits/", { pk:{{ critmixID }}, jsonData: txt });
+}
+//*/
+
+///*
+function addClickHandlers() {
+  $("#button_save").click( function() { 
+    //gg = "{'start': new Date(1338534000000),'content': 'Fri Jun 01 2012 00:00:00 GMT-0700 (PDT)<br/>Criticism #1'},{'start': new Date(1338620400000),'content': 'Fri Jun 01 2012 00:00:00 GMT-0700 (PDT)<br/>Criticism #1'},{'start': new Date(1338620483000),'content': 'Vocals Unclear'},{'start': new Date(1338620572000),'content': 'Bass Unclear'},{'start': new Date(1338620642000),'content': 'Vocals Unclear'},"
+    //gg = 'asdf';
+
+        txt = "";
+for (i = 0; i < timeline.getData().length; i++) {
+  txt += "{";
+  txt += "'start': new Date(" + timeline.getData()[i].start.getTime() + ")";
+  txt += ",";
+  txt += "'content': \'" + timeline.getData()[i].content + "\'";
+  txt += "},";
+}
+//console.log(txt);
+
+    savecrits(txt);
+  });
+}
+//*/
+
+///*
+$(document).ready(addClickHandlers);
+//*/
+
 var timeline;
 var critList = new Object(); // doesn't work when placed in document.ready, weird!
 var rud ;
