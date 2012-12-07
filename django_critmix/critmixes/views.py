@@ -13,15 +13,10 @@ def index(request):
 
 def detail(request, critmix_id):
     p = get_object_or_404(Critmix, pk=critmix_id)
-    # get a tracks oembed data
     track_url = p.mix_url
-    print "meow", p.id
     meow = "b12a"
     embed_info = client.get('/oembed', url=track_url, show_comments='false')
-    # print the html for the player widget
-    print embed_info.html
     track = client.get('/resolve', url=track_url)
-    print 'duration', track.duration
     return render_to_response('critmixes/detail.html', {'critmix': p, 'embed_info': embed_info.html, 'duration': track.duration, 'jsonData': p.jsonData,'critmixID': p.id})
 
 def results(request, critmix_id):
@@ -40,8 +35,6 @@ def savecrits(request):
             critmix = Critmix.objects.get(pk=pk)
             critmix.jsonData = txt
             critmix.save()
-            #print critmix.jsonData
             results = {'success':True}
     json = simplejson.dumps(results)
-    print "HIYOOOOOOO", json
     return HttpResponse(json, mimetype='application/json')
