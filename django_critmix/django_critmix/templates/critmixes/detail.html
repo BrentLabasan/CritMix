@@ -278,6 +278,12 @@ document.addEventListener('keyup', function(event) { //http://stackoverflow.com/
       case 83:
         critType = 10;
         break;
+      case 68:
+        critType = 11;
+        break;
+      case 70:
+        critType = 12;
+        break;
       default:
         return false;
         break;
@@ -286,10 +292,16 @@ document.addEventListener('keyup', function(event) { //http://stackoverflow.com/
     switch (critType) {
       case 20:
         // makeCrit(id, critType, timePosition, comment)
-        makeCrit(randomID, 20, currTime, 'Vocals Unclear')
+        makeCrit(randomID, 20, currTime, 'Vocals')
         break;
       case 10:
-        makeCrit(randomID, 10, currTime, 'Bass Unclear')
+        makeCrit(randomID, 10, currTime, 'Bass')
+        break;
+      case 11:
+        makeCrit(randomID, 11, currTime, 'Mids')
+        break;
+      case 12:
+        makeCrit(randomID, 12, currTime, 'Treble')
         break;
       default:
         return false;
