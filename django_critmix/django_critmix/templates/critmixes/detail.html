@@ -7,14 +7,15 @@
 
 {% block content %}  
 
+<section id="sectionSoundCloud">
 <h1><a href="{{ critmix }}" target="_blank">{{ title }} by {{artist}}</a></h1>
 
 <div id="SCholder">{{ embed_info|safe }}</div>
-<div id="holder_seconds">Position: <span id="sec">test1</span></div>
-<br/><br/><br/>
 <div>
+</section>
 
-<ul id="critButtons">
+<section id="sectionTimeline">
+<ul class="CMixMenu" id="critButtons">
 <li id="" class="button critType20">(A) VOCALS</li>
 <li id="" class="button critType10">(S) BASS</li>
 <li id="" class="button critType11">(D) MID</li>
@@ -27,12 +28,13 @@
 <li id="" class="button">(;) Subbass</li>
 -->
 </ul>
-<ul id="controlButtons">
+<ul class="CMixMenu" id="controlButtons">
 <li id="" class="button">BACKWARD</li>
 <li id="" class="button">PLAY PAUSE</li>
 <li id="" class="button">FOWARD</li>
+<li id="" class="button">POSITION: <span id="holder_seconds">0.0</span></li>
 </ul>
-<ul id="saveButton">
+<ul class="CMixMenu" id="saveButton">
 <li id="button_save" class="button">SAVE</li>
 </ul>
 
@@ -43,6 +45,7 @@
 </div>
 
 <div id="mytimeline"></div>
+</section>
 
 {% endblock %}
 

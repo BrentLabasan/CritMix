@@ -5,7 +5,18 @@
 <head>
 	<title> | CritMix</title>
 
-	<style type="text/css">
+<style type="text/css">
+.CMixMenu {
+	margin: 0 0 0 40px;
+}
+
+#sectionSoundCloud{
+margin: 0 15px 25px 15px;
+}
+
+#sectionTimeline{
+margin: 0 15px 0 15px;
+}
 ul{
 	margin:0; padding:0; 
 }	
@@ -28,6 +39,7 @@ cursor: pointer;
 }
 #critButtons {
 float: left;
+margin-bottom: 20px;
 }
 #critButtons li{
 display: inline;
@@ -68,6 +80,14 @@ font-weight: bold;
 display: inline;
 list-style-type: none;
 margin: 10px 5px 5px 15px;
+}
+
+#holder_seconds {
+	color:white;
+font-weight: bold;
+background-color: purple;
+height: 30px;
+
 }
 	
 
@@ -190,12 +210,13 @@ widget.bind(SC.Widget.Events.READY, function() {
   widget.setVolume(50);
 
   // get the value of the current position
+  /*
    widget.getPosition(function(position) {
     console.log('current position value is ' + position);
     $('#holder_seconds').text(position);
     $("#holder_seconds").focus();
   });
-
+*/
 
 rud = widget.getDuration(function(duration, rud) {
   rud = duration ;
