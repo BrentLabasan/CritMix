@@ -1,0 +1,382 @@
+{% load staticfiles %}
+<!DOCTYPE HTML>
+<html lang="en">
+<html>
+<head>
+	<title> | CritMix</title>
+
+<style type="text/css">
+.CMixMenu {
+	margin: 0 0 0 40px;
+}
+
+#sectionSoundCloud{
+margin: 0 15px 25px 15px;
+}
+
+#sectionTimeline{
+margin: 0 15px 0 15px;
+}
+ul{
+	margin:0; padding:0; 
+}	
+body {
+font-family: Arial;
+ margin:0; padding:0; 
+}
+a:link {color: #707070; text-decoration:none;}
+a:visited {color: #707070; text-decoration:none;}
+a:hover {color: #cccccc; text-decoration:none;}
+a:active {color: #cccccc; text-decoration:none;}
+.button {
+color: white;
+font-size: 13px;
+font-weight: bold;
+cursor: pointer;
+}
+#mytimeline {
+  margin:20px;
+}
+#critButtons {
+float: left;
+margin-bottom: 20px;
+}
+#critButtons li{
+display: inline;
+list-style-type: none;
+padding: 10px;
+background-color: blue;
+margin: 0px;
+}
+#controlButtons {
+float: left;
+}
+#controlButtons li{
+display: inline;
+list-style-type: none;
+padding: 10px;
+background-color: purple;
+}
+#saveButton {
+float: left;
+}
+#saveButton li{
+display: inline;
+list-style-type: none;
+padding: 10px;
+background-color: red;
+}
+nav {
+	background-color:#141414;
+	height: 30px;
+	padding-top: 15px;
+	border-bottom: 2px solid #ADADAD;
+}
+#site_nav {
+color:white;
+font-weight: bold;
+}
+#site_nav li {
+display: inline;
+list-style-type: none;
+margin: 10px 5px 5px 15px;
+}
+
+#holder_seconds {
+	color:white;
+font-weight: bold;
+background-color: purple;
+height: 30px;
+
+}
+	
+
+</style>
+
+<script src="http:////ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+<script src="http://code.jquery.com/ui/1.9.2/jquery-ui.js"></script>
+<!-- SoundCloud -->
+<script src="http://connect.soundcloud.com/sdk.js"></script>
+<script src="http://w.soundcloud.com/player/api.js" type="text/javascript"></script>
+<!-- Almende Timeline -->
+<script type="text/javascript" src="http://www.google.com/jsapi"></script>
+<script src="{% static "timeline-2.3.2/timeline.js" %}" type="text/javascript"></script>
+<link rel="stylesheet" type="text/css" href="{% static "timeline-2.3.2/timeline.css" %}">
+
+<script type="text/javascript">
+
+///*
+function savecrits(txt) {
+  $.getJSON("/savecrits/", { pk:{{ critmixID }}, jsonData: txt });
+
+  $('.timeline-axis-text-minor').each(function() {
+    var scheme = $(this);
+    x = scheme.text();
+    scheme.text("." + x);
+});
+}
+//*/
+
+///*
+function addClickHandlers() {
+  $("#button_save").click( function() { 
+    //gg = "{'start': new Date(1338534000000),'content': 'Fri Jun 01 2012 00:00:00 GMT-0700 (PDT)<br/>Criticism #1'},{'start': new Date(1338620400000),'content': 'Fri Jun 01 2012 00:00:00 GMT-0700 (PDT)<br/>Criticism #1'},{'start': new Date(1338620483000),'content': 'Vocals Unclear'},{'start': new Date(1338620572000),'content': 'Bass Unclear'},{'start': new Date(1338620642000),'content': 'Vocals Unclear'},"
+    //gg = 'asdf';
+
+        txt = "";
+for (i = 0; i < timeline.getData().length; i++) {
+  txt += "{";
+  txt += "'start': new Date(" + timeline.getData()[i].start.getTime() + ")";
+  txt += ",";
+  txt += "'content': \'" + timeline.getData()[i].content + "\'";
+  txt += "},";
+}
+//console.log(txt);
+
+    savecrits(txt);
+  });
+}
+//*/
+
+///*
+$(document).ready(addClickHandlers);
+//*/
+
+var timeline;
+var critList = new Object(); // doesn't work when placed in document.ready, weird!
+var rud ;
+
+/*
+0 mix too muddy
+10 bass too muddy 11 mids too muddy 12 treble too muddy
+20 vocals 21 kick 22 snare 23 subbass
+30 transition
+*/
+
+function makeCrit(id, critType, timePosition, comment) {
+  //$('#critsHolder').append(timePosition + " " + critType + " " + comment + "</br>");
+  console.log(timePosition + " " + critType + " " + comment);
+  critList[randomID] = {
+    id: id,
+    critType: critType,
+    timePosition: timePosition,
+    comment: comment
+  } 
+
+
+
+$(".critType" + critType).effect("highlight");
+//$(".critType" + critType).effect("bounce"); // looks whack
+
+var props = {
+'start': new Date(2012,5,2,0,0,timePosition),
+'content': comment
+};
+
+  timeline.addItem(props); // properties is an Object, containing parameters start (Date), end (Date), content (String), group (String). Parameters end and group are optional.
+
+
+} //func makeCrit
+
+$(document).ready(function() {
+
+var iframeElement   = document.querySelector('iframe');
+//var iframeElementID = iframeElement.id;
+var widget        = SC.Widget(iframeElement);
+//var widget2         = SC.Widget(iframeElementID);
+console.log(iframeElement);
+//console.log(iframeElementID);
+console.log(widget);
+//console.log(widget2);
+
+
+widget.bind(SC.Widget.Events.READY, function() {
+
+  console.log(SC.Widget.Events.PLAY_PROGRESS.currentPosition);
+
+  widget.bind(SC.Widget.Events.PLAY, function() {
+    // get information about currently playing sound
+    widget.getCurrentSound(function(currentSound) { 
+      console.log('sound ' + currentSound.get('') + 'began to play');
+    });
+  });
+
+  // get current level of volume
+  widget.getVolume(function(volume) {
+    console.log('current volume value is ' + volume);
+  });
+
+  // set new volume level
+  widget.setVolume(50);
+
+  // get the value of the current position
+  /*
+   widget.getPosition(function(position) {
+    console.log('current position value is ' + position);
+    $('#holder_seconds').text(position);
+    $("#holder_seconds").focus();
+  });
+*/
+
+rud = widget.getDuration(function(duration, rud) {
+  rud = duration ;
+  console.log('current duration value is ' + rud); 
+  return duration ;
+});
+console.log("rud1 " + rud);
+//console.log("rud1 " +  widget.getDuration()  );
+
+
+});
+
+      //google.load("visualization", "1");
+      
+      // Set callback to run when API is loaded
+      google.setOnLoadCallback(drawVisualization); 
+
+      // Called when the Visualization API is loaded.
+      function drawVisualization() {
+chee = new Date(2012,5,1,0,0);
+        var data = [ {{ jsonData|safe }} ];
+
+
+
+//alert("{{ jsonData|safe }}");
+/*
+chee1 = new Date(2012,5,2,0,1,45);
+data.push({
+  'start': new Date(2012,5,2,0,1,45),
+  //'end': new Date(2010, 8, 2),  // end is optional
+  'content': chee1 + "<br/>Criticism #2"
+  // Optional: a parameter 'group'
+  // Optional: a parameter 'className'
+});
+
+chee2 = new Date(2012,5,2,0,2,0);
+data.push({
+  'start': new Date(2012,5,2,0,2,0),
+  //'end': new Date(2010, 8, 2),  // end is optional
+  'content': chee2 + "<br/>Criticism #3"
+  // Optional: a parameter 'group'
+  // Optional: a parameter 'className'
+});
+*/
+
+        // specify options
+        // Date(year, month, day, hours, minutes, seconds, milliseconds)
+        var options = {
+          "axisOnTop": true,
+          "editable": true,
+          "width":  "100%", 
+          "height": "300px", 
+          "style": "box",
+          "intervalMin": {{ duration }},
+          "intervalMax": {{ duration }},
+          "min": new Date(2012, 5, 2,0,0,0), // 
+          "max": new Date(2012, 5, 2,0,0,{{ duration }}/1000),
+          "showCustomTime": true,
+          "boxAlign": "left"
+          //"scale": "SCALE.YEAR",
+          //"step": "5",
+          //"zoomable": true,
+        };
+
+        // Instantiate our timeline object.
+        timeline = new links.Timeline(document.getElementById('mytimeline'));
+        
+        // Draw our timeline with the created data and options 
+        timeline.draw(data, options);
+        //timeline.deleteAllItems(); // works
+        //timeline.setScale(SCALE.MINUTES, 2);
+        timeline.setScale(links.Timeline.StepDate.SCALE.SECOND, 15);
+$(".timeline-axis-text-major").hide();
+
+//$(".timeline-axis-text-minor").hide();
+
+// DOESN'T WORK
+$('.timeline-axis-text-minor').each(function() {
+    var scheme = $(this);
+    x = scheme.text();
+    scheme.text("." + x);
+});   
+
+$('.timeline-customtime').first().append("<span>wow</span>");
+
+      }
+
+
+
+widget.bind(SC.Widget.Events.PLAY_PROGRESS, function(currentPosition) {
+var secs = currentPosition.currentPosition/1000 ;
+$('#holder_seconds').text(secs.toFixed(1)); // works
+timeline.setCustomTime(new Date(2012,5,2,0,0,0,currentPosition.currentPosition));
+//$('#holder_seconds').text( $('.timeIndicator__current').text() ); // span becomes blank
+}); // PLAY_PROGRESS
+
+document.addEventListener('keyup', function(event) { //http://stackoverflow.com/questions/1349404/generate-a-string-of-5-random-characters-in-javascript/8084248#8084248
+  console.log("event.keyCode " + event.keyCode)
+    randomID = Math.random().toString(36).substr(2, 5) ;
+    while (critList[randomID]) { // if there's already a Crit with that ID, generate a new randomID
+      randomID = Math.random().toString(36).substr(2, 5) ;
+    }
+    currTime = $('#holder_seconds').text()
+
+    switch (event.keyCode) {
+      case 65:
+        critType = 20;
+        break;
+      case 83:
+        critType = 10;
+        break;
+      case 68:
+        critType = 11;
+        break;
+      case 70:
+        critType = 12;
+        break;
+      default:
+        return false;
+        break;
+    }
+
+    switch (critType) {
+      case 20:
+        // makeCrit(id, critType, timePosition, comment)
+        makeCrit(randomID, 20, currTime, 'Vocals')
+        break;
+      case 10:
+        makeCrit(randomID, 10, currTime, 'Bass')
+        break;
+      case 11:
+        makeCrit(randomID, 11, currTime, 'Mids')
+        break;
+      case 12:
+        makeCrit(randomID, 12, currTime, 'Treble')
+        break;
+      default:
+        return false;
+        break;
+        
+    }
+});
+
+
+
+}); // .ready
+
+
+
+</script>
+</head>
+<body>
+<nav>
+<ul id="site_nav">
+	<li><a href="/">HOME</a></li>
+	<li><a href="/getcritmixed">GET A SONG CRITIQUED</a></li>
+	<li><a href="/critmixes">ALL CRITMIXES</a></li>
+	<li><a href="/about">ABOUT</a></li>
+</ul>
+</nav>
+{% block content %}{% endblock %}
+</body>
+</html>
