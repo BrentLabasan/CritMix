@@ -323,8 +323,8 @@ document.addEventListener('keyup', function(event) { //http://stackoverflow.com/
 </head>
 <body>
 
-<h1>{{ title }} by {{artist}}</h1>
-{{ critmix }}
+<h1><a href="{{ critmix }}" target="_blank">{{ title }} by {{artist}}</a></h1>
+
 <div id="SCholder">{{ embed_info|safe }}</div>
 <div id="holder_seconds">Position: <span id="sec">test1</span></div>
 <br/><br/><br/>
@@ -333,8 +333,8 @@ document.addEventListener('keyup', function(event) { //http://stackoverflow.com/
 <ul id="critButtons">
 <li id="" class="button critType20">(A) VOCALS</li>
 <li id="" class="button critType10">(S) BASS</li>
-<li id="" class="button">(D) MID</li>
-<li id="" class="button">(F) TREBLE</li>
+<li id="" class="button critType11">(D) MID</li>
+<li id="" class="button critType12">(F) TREBLE</li>
 
 <!--
 <li id="" class="button">(J) Kick Drum</li>
