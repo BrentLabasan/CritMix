@@ -260,7 +260,7 @@ $('.timeline-customtime').first().append("<span>wow</span>");
 
 widget.bind(SC.Widget.Events.PLAY_PROGRESS, function(currentPosition) {
 var secs = currentPosition.currentPosition/1000 ;
-$('#holder_seconds').text(secs); // works
+$('#holder_seconds').text(secs.toFixed(1)); // works
 timeline.setCustomTime(new Date(2012,5,2,0,0,0,currentPosition.currentPosition));
 //$('#holder_seconds').text( $('.timeIndicator__current').text() ); // span becomes blank
 }); // PLAY_PROGRESS
