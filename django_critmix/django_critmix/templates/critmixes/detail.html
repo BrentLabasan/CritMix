@@ -59,6 +59,12 @@ background-color: purple;
 ///*
 function savecrits(txt) {
   $.getJSON("/savecrits/", { pk:{{ critmixID }}, jsonData: txt });
+
+  $('.timeline-axis-text-minor').each(function() {
+    var scheme = $(this);
+    x = scheme.text();
+    scheme.text("." + x);
+});
 }
 //*/
 
@@ -234,7 +240,13 @@ data.push({
         //timeline.setScale(SCALE.MINUTES, 2);
         timeline.setScale(links.Timeline.StepDate.SCALE.SECOND, 15);
 $(".timeline-axis-text-major").hide();
-       
+
+//$(".timeline-axis-text-minor").hide();
+$('.timeline-axis-text-minor').each(function() {
+    var scheme = $(this);
+    x = scheme.text();
+    scheme.text("." + x);
+});   
       }
 
 
