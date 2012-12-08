@@ -34,12 +34,14 @@ list-style-type: none;
 padding: 10px;
 background-color: purple;
 }
-
-#button_save {
-  color:white;
-  background-color: red;
-  font-weight: bold;
-  padding: 10px;
+#saveButton {
+float: left;
+}
+#saveButton li{
+display: inline;
+list-style-type: none;
+padding: 10px;
+background-color: red;
 }
 </style>
 
@@ -346,6 +348,9 @@ document.addEventListener('keyup', function(event) { //http://stackoverflow.com/
 <li id="" class="button">PLAY PAUSE</li>
 <li id="" class="button">FOWARD</li>
 </ul>
+<ul id="saveButton">
+<li id="button_save" class="button">SAVE</li>
+</ul>
 
 </div>
 
@@ -355,7 +360,7 @@ document.addEventListener('keyup', function(event) { //http://stackoverflow.com/
 
 <div id="mytimeline"></div>
 
-<span id="button_save" class="button">SAVE</span>
+
 
 </body>
 </html>
