@@ -242,11 +242,16 @@ data.push({
 $(".timeline-axis-text-major").hide();
 
 //$(".timeline-axis-text-minor").hide();
+
+// DOESN'T WORK
 $('.timeline-axis-text-minor').each(function() {
     var scheme = $(this);
     x = scheme.text();
     scheme.text("." + x);
 });   
+
+$('.timeline-customtime').first().append("<span>wow</span>");
+
       }
 
 
