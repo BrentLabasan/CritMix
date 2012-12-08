@@ -17,7 +17,8 @@ def detail(request, critmix_id):
     meow = "b12a"
     embed_info = client.get('/oembed', url=track_url, show_comments='false')
     track = client.get('/resolve', url=track_url)
-    return render_to_response('critmixes/detail.html', {'critmix': p, 'embed_info': embed_info.html, 'duration': track.duration, 'jsonData': p.jsonData,'critmixID': p.id})
+    print track.user[u'username']
+    return render_to_response('critmixes/detail.html', {'critmix': p, 'embed_info': embed_info.html, 'duration': track.duration, 'jsonData': p.jsonData,'critmixID': p.id, 'title': track.title, 'artist': track.user[u'username']})
 
 def results(request, critmix_id):
     return HttpResponse("You're looking at the results of critmix %s." % critmix_id)
