@@ -1,6 +1,6 @@
 # Django settings for django_critmix project.
 
-INTERNAL_IPS = ('127.0.0.1','10.252.66.130')
+INTERNAL_IPS = ('127.0.0.1','173.230.157.188')
 
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
