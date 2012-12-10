@@ -1,6 +1,6 @@
 # Django settings for django_critmix project.
 
-INTERNAL_IPS = ('127.0.0.1','173.230.157.188')
+#INTERNAL_IPS = ('127.0.0.1','173.230.157.188')
 
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
@@ -95,7 +95,7 @@ MIDDLEWARE_CLASSES = (
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
-    'debug_toolbar.middleware.DebugToolbarMiddleware',
+#    'debug_toolbar.middleware.DebugToolbarMiddleware',
     # Uncomment the next line for simple clickjacking protection:
     # 'django.middleware.clickjacking.XFrameOptionsMiddleware',
 )
@@ -126,7 +126,7 @@ INSTALLED_APPS = (
     'django.contrib.admin',
     # Uncomment the next line to enable admin documentation:
     'django.contrib.admindocs',
-    'debug_toolbar',
+#    'debug_toolbar',
 )
 
 # A sample logging configuration. The only tangible logging
