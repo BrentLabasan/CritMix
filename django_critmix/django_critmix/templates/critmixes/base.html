@@ -28,7 +28,6 @@ function savecrits(txt) {
   });
 }
 
-
 function addClickHandlers() {
   $("#button_save").click( function() { 
     txt = "";
@@ -43,23 +42,12 @@ function addClickHandlers() {
 }
 
 
-///*
 $(document).ready(addClickHandlers);
-//*/
 
 var timeline;
 var critList = new Object(); // doesn't work when placed in document.ready, weird!
-var rud ;
-
-/*
-0 mix too muddy
-10 bass too muddy 11 mids too muddy 12 treble too muddy
-20 vocals 21 kick 22 snare 23 subbass
-30 transition
-*/
 
 function makeCrit(id, critType, timePosition, comment) {
-  //$('#critsHolder').append(timePosition + " " + critType + " " + comment + "</br>");
   console.log(timePosition + " " + critType + " " + comment);
   critList[randomID] = {
     id: id,
@@ -68,58 +56,45 @@ function makeCrit(id, critType, timePosition, comment) {
     comment: comment + "ham"
   } 
 
+  $(".critType" + critType).effect("highlight");
 
+  var props = {
+  'start': new Date(2012,5,2,0,0,timePosition),
+  'content': comment + "cheese"
+  };
 
-$(".critType" + critType).effect("highlight");
-//$(".critType" + critType).effect("bounce"); // looks whack
-
-var props = {
-'start': new Date(2012,5,2,0,0,timePosition),
-'content': comment + "cheese"
-};
-
-timeline.addItem(props); // properties is an Object, containing parameters start (Date), end (Date), content (String), group (String). Parameters end and group are optional.
-
+  timeline.addItem(props); // properties is an Object, containing parameters start (Date), end (Date), content (String), group (String). Parameters end and group are optional.
 
 } //func makeCrit
 
 $(document).ready(function() {
 
-var iframeElement   = document.querySelector('iframe');
-var widget        = SC.Widget(iframeElement);
-console.log(iframeElement);
-console.log(widget);
+  var iframeElement   = document.querySelector('iframe');
+  var widget        = SC.Widget(iframeElement);
+  console.log(iframeElement);
+  console.log(widget);
 
 
-widget.bind(SC.Widget.Events.READY, function() {
+  widget.bind(SC.Widget.Events.READY, function() {
 
-  console.log(SC.Widget.Events.PLAY_PROGRESS.currentPosition);
+    console.log(SC.Widget.Events.PLAY_PROGRESS.currentPosition);
 
-  widget.bind(SC.Widget.Events.PLAY, function() {
-    // get information about currently playing sound
-    widget.getCurrentSound(function(currentSound) { 
-      console.log('sound ' + currentSound.get('') + 'began to play');
+    widget.bind(SC.Widget.Events.PLAY, function() {
+      // get information about currently playing sound
+      widget.getCurrentSound(function(currentSound) { 
+        console.log('sound ' + currentSound.get('') + 'began to play');
+      });
     });
+
+    // get current level of volume
+    widget.getVolume(function(volume) {
+      console.log('current volume value is ' + volume);
+    });
+
+    // set new volume level
+    widget.setVolume(50);
+
   });
-
-  // get current level of volume
-  widget.getVolume(function(volume) {
-    console.log('current volume value is ' + volume);
-  });
-
-  // set new volume level
-  widget.setVolume(50);
-
-
-rud = widget.getDuration(function(duration, rud) {
-  rud = duration ;
-  console.log('current duration value is ' + rud); 
-  return duration ;
-});
-console.log("rud1 " + rud);
-
-
-});
 
       
       // Set callback to run when API is loaded
