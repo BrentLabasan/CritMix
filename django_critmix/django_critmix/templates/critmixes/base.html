@@ -5,94 +5,7 @@
 <head>
 	<title> | CritMix</title>
 
-<style type="text/css">
-.CMixMenu {
-	margin: 0 0 0 40px;
-}
 
-#sectionSoundCloud{
-margin: 0 15px 25px 15px;
-}
-
-#sectionTimeline{
-margin: 0 15px 0 15px;
-}
-ul{
-	margin:0; padding:0; 
-}	
-body {
-font-family: Arial;
- margin:0; padding:0; 
-}
-a:link {color: #707070; text-decoration:none;}
-a:visited {color: #707070; text-decoration:none;}
-a:hover {color: #cccccc; text-decoration:none;}
-a:active {color: #cccccc; text-decoration:none;}
-.button {
-color: white;
-font-size: 13px;
-font-weight: bold;
-cursor: pointer;
-}
-#mytimeline {
-  margin:20px;
-}
-#critButtons {
-float: left;
-margin-bottom: 20px;
-}
-#critButtons li{
-display: inline;
-list-style-type: none;
-padding: 10px;
-background-color: blue;
-margin: 0px;
-}
-#controlButtons {
-float: left;
-}
-#controlButtons li{
-display: inline;
-list-style-type: none;
-padding: 10px;
-background-color: purple;
-}
-#saveButton {
-float: left;
-}
-#saveButton li{
-display: inline;
-list-style-type: none;
-padding: 10px;
-background-color: red;
-}
-nav {
-	background-color:#141414;
-	height: 30px;
-	padding-top: 15px;
-	border-bottom: 2px solid #ADADAD;
-}
-#site_nav {
-color:white;
-font-weight: bold;
-}
-#site_nav li {
-display: inline;
-list-style-type: none;
-margin: 10px 5px 5px 15px;
-}
-
-#holder_seconds {
-	color:white;
-font-weight: bold;
-background-color: purple;
-height: 30px;
-
-}
-	
-
-</style>
-<link rel="stylesheet" type="text/css" href="{% static "css/base.css" %}">
 <script src="http:////ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
 <script src="http://code.jquery.com/ui/1.9.2/jquery-ui.js"></script>
 <!-- SoundCloud -->
@@ -105,7 +18,6 @@ height: 30px;
 
 <script type="text/javascript">
 
-///*
 function savecrits(txt) {
   $.getJSON("/savecrits/", { pk:{{ critmixID }}, jsonData: txt });
 
@@ -115,7 +27,6 @@ function savecrits(txt) {
     scheme.text("." + x);
 });
 }
-//*/
 
 ///*
 function addClickHandlers() {
@@ -209,14 +120,6 @@ widget.bind(SC.Widget.Events.READY, function() {
   // set new volume level
   widget.setVolume(50);
 
-  // get the value of the current position
-  /*
-   widget.getPosition(function(position) {
-    console.log('current position value is ' + position);
-    $('#holder_seconds').text(position);
-    $("#holder_seconds").focus();
-  });
-*/
 
 rud = widget.getDuration(function(duration, rud) {
   rud = duration ;
@@ -239,29 +142,6 @@ console.log("rud1 " + rud);
 chee = new Date(2012,5,1,0,0);
         var data = [ {{ jsonData|safe }} ];
 
-
-
-//alert("{{ jsonData|safe }}");
-/*
-chee1 = new Date(2012,5,2,0,1,45);
-data.push({
-  'start': new Date(2012,5,2,0,1,45),
-  //'end': new Date(2010, 8, 2),  // end is optional
-  'content': chee1 + "<br/>Criticism #2"
-  // Optional: a parameter 'group'
-  // Optional: a parameter 'className'
-});
-
-chee2 = new Date(2012,5,2,0,2,0);
-data.push({
-  'start': new Date(2012,5,2,0,2,0),
-  //'end': new Date(2010, 8, 2),  // end is optional
-  'content': chee2 + "<br/>Criticism #3"
-  // Optional: a parameter 'group'
-  // Optional: a parameter 'className'
-});
-*/
-
         // specify options
         // Date(year, month, day, hours, minutes, seconds, milliseconds)
         var options = {
@@ -276,10 +156,6 @@ data.push({
           "min": new Date(2012, 5, 2,0,0,0), // 
           "max": new Date(2012, 5, 2,0,0,{{ duration }}/1000),
           "showCustomTime": true,
-          
-          //"scale": "SCALE.YEAR",
-          //"step": "5",
-          //"zoomable": true,
         };
 
         // Instantiate our timeline object.
@@ -287,12 +163,8 @@ data.push({
         
         // Draw our timeline with the created data and options 
         timeline.draw(data, options);
-        //timeline.deleteAllItems(); // works
-        //timeline.setScale(SCALE.MINUTES, 2);
         timeline.setScale(links.Timeline.StepDate.SCALE.SECOND, 15);
 $(".timeline-axis-text-major").hide();
-
-//$(".timeline-axis-text-minor").hide();
 
 // DOESN'T WORK
 $('.timeline-axis-text-minor').each(function() {
@@ -367,7 +239,11 @@ document.addEventListener('keyup', function(event) { //http://stackoverflow.com/
 
 
 
+
+
 </script>
+<script src="{% static "js/base.js" %}" type="text/javascript"></script>
+<link rel="stylesheet" type="text/css" href="{% static "css/base.css" %}">
 </head>
 <body>
 <nav>
