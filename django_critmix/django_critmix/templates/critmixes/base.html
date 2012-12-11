@@ -60,7 +60,7 @@ function makeCrit(id, critType, timePosition, comment) {
 
   var props = {
   'start': new Date(2012,5,2,0,0,timePosition),
-  'content': comment + "cheese"
+  'content': comment + "<br/><form><input type='radio' name='volume' id='loud'><label for='loud'>Too Loud?</label><input type='radio' name='volume' id='soft'><label for='soft'>Too Soft?</label></form>"
   };
 
   timeline.addItem(props); // properties is an Object, containing parameters start (Date), end (Date), content (String), group (String). Parameters end and group are optional.
