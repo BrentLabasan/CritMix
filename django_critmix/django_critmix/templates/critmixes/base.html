@@ -28,26 +28,23 @@ function savecrits(txt) {
 });
 }
 
-///*
+
 function addClickHandlers() {
   $("#button_save").click( function() { 
     //gg = "{'start': new Date(1338534000000),'content': 'Fri Jun 01 2012 00:00:00 GMT-0700 (PDT)<br/>Criticism #1'},{'start': new Date(1338620400000),'content': 'Fri Jun 01 2012 00:00:00 GMT-0700 (PDT)<br/>Criticism #1'},{'start': new Date(1338620483000),'content': 'Vocals Unclear'},{'start': new Date(1338620572000),'content': 'Bass Unclear'},{'start': new Date(1338620642000),'content': 'Vocals Unclear'},"
     //gg = 'asdf';
 
         txt = "";
-for (i = 0; i < timeline.getData().length; i++) {
-  txt += "{";
-  txt += "'start': new Date(" + timeline.getData()[i].start.getTime() + ")";
-  txt += ",";
-  txt += "'content': \'" + timeline.getData()[i].content + "\'";
-  txt += "},";
-}
-//console.log(txt);
-
-    savecrits(txt);
+  for (i = 0; i < timeline.getData().length; i++) {
+    txt += "{";
+    txt += "'start': new Date(" + timeline.getData()[i].start.getTime() + ")";
+    txt += ",";
+    txt += "'content': \'" + timeline.getData()[i].content + "\'";
+    txt += "},";
+  }
   });
 }
-//*/
+
 
 ///*
 $(document).ready(addClickHandlers);
@@ -84,7 +81,7 @@ var props = {
 'content': comment + "cheese"
 };
 
-  timeline.addItem(props); // properties is an Object, containing parameters start (Date), end (Date), content (String), group (String). Parameters end and group are optional.
+timeline.addItem(props); // properties is an Object, containing parameters start (Date), end (Date), content (String), group (String). Parameters end and group are optional.
 
 
 } //func makeCrit
@@ -92,13 +89,9 @@ var props = {
 $(document).ready(function() {
 
 var iframeElement   = document.querySelector('iframe');
-//var iframeElementID = iframeElement.id;
 var widget        = SC.Widget(iframeElement);
-//var widget2         = SC.Widget(iframeElementID);
 console.log(iframeElement);
-//console.log(iframeElementID);
 console.log(widget);
-//console.log(widget2);
 
 
 widget.bind(SC.Widget.Events.READY, function() {
@@ -127,12 +120,10 @@ rud = widget.getDuration(function(duration, rud) {
   return duration ;
 });
 console.log("rud1 " + rud);
-//console.log("rud1 " +  widget.getDuration()  );
 
 
 });
 
-      //google.load("visualization", "1");
       
       // Set callback to run when API is loaded
       google.setOnLoadCallback(drawVisualization); 
@@ -142,8 +133,6 @@ console.log("rud1 " + rud);
 chee = new Date(2012,5,1,0,0);
         var data = [ {{ jsonData|safe }} ];
 
-        // specify options
-        // Date(year, month, day, hours, minutes, seconds, milliseconds)
         var options = {
           axisOnTop: true,
           editable: true,
