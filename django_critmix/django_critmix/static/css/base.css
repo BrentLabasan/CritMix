@@ -1,0 +1,83 @@
+.CMixMenu {
+	margin: 0 0 0 40px;
+}
+
+#sectionSoundCloud{
+margin: 0 15px 25px 15px;
+}
+
+#sectionTimeline{
+margin: 0 15px 0 15px;
+}
+ul{
+	margin:0; padding:0; 
+}	
+body {
+font-family: Arial;
+ margin:0; padding:0; 
+}
+a:link {color: #707070; text-decoration:none;}
+a:visited {color: #707070; text-decoration:none;}
+a:hover {color: #cccccc; text-decoration:none;}
+a:active {color: #cccccc; text-decoration:none;}
+.button {
+color: white;
+font-size: 13px;
+font-weight: bold;
+cursor: pointer;
+}
+#mytimeline {
+  margin:20px;
+}
+#critButtons {
+float: left;
+margin-bottom: 20px;
+}
+#critButtons li{
+display: inline;
+list-style-type: none;
+padding: 10px;
+background-color: blue;
+margin: 0px;
+}
+#controlButtons {
+float: left;
+}
+#controlButtons li{
+display: inline;
+list-style-type: none;
+padding: 10px;
+background-color: purple;
+}
+#saveButton {
+float: left;
+}
+#saveButton li{
+display: inline;
+list-style-type: none;
+padding: 10px;
+background-color: red;
+}
+nav {
+	background-color:#141414;
+	height: 30px;
+	padding-top: 15px;
+	border-bottom: 2px solid #ADADAD;
+}
+#site_nav {
+color:white;
+font-weight: bold;
+}
+#site_nav li {
+display: inline;
+list-style-type: none;
+margin: 10px 5px 5px 15px;
+}
+
+#holder_seconds {
+	color:white;
+font-weight: bold;
+background-color: purple;
+height: 30px;
+
+}

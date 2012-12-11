@@ -92,7 +92,7 @@ height: 30px;
 	
 
 </style>
-
+<link rel="stylesheet" type="text/css" href="{% static "css/base.css" %}">
 <script src="http:////ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
 <script src="http://code.jquery.com/ui/1.9.2/jquery-ui.js"></script>
 <!-- SoundCloud -->
@@ -160,7 +160,7 @@ function makeCrit(id, critType, timePosition, comment) {
     id: id,
     critType: critType,
     timePosition: timePosition,
-    comment: comment
+    comment: comment + "ham"
   } 
 
 
@@ -170,7 +170,7 @@ $(".critType" + critType).effect("highlight");
 
 var props = {
 'start': new Date(2012,5,2,0,0,timePosition),
-'content': comment
+'content': comment + "cheese"
 };
 
   timeline.addItem(props); // properties is an Object, containing parameters start (Date), end (Date), content (String), group (String). Parameters end and group are optional.
