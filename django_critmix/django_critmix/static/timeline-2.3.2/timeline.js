@@ -193,10 +193,7 @@ links.Timeline = function(container) {
         'animate': true,
         'animateZoom': true,
         'cluster': false,
-        'style': 'box',
-        'align': {
-            'right': 'right'
-        }
+        'style': 'box'
     };
 
     this.clientTimeOffset = 0;    // difference between client time and the time
@@ -3754,13 +3751,12 @@ links.Timeline.ItemBox.prototype.updatePosition = function (timeline) {
             boxAlign = (timeline.options.box && timeline.options.box.align) ?
                 timeline.options.box.align : undefined;
 
-        boxAlign = 'left';
         dom.style.top = this.top + "px";
         if (boxAlign == 'right') {
             dom.style.left = (left - this.width) + "px";
         }
         else if (boxAlign == 'left') {
-            dom.style.left = (left - 5) + "px";
+            dom.style.left = (left) + "px";
         }
         else { // default or 'center'
             dom.style.left = (left - this.width/2) + "px";
@@ -3824,7 +3820,6 @@ links.Timeline.ItemBox.prototype.setPosition = function (left, right) {
  * @override
  */
 links.Timeline.ItemBox.prototype.getRight = function (timeline) {
-
     var boxAlign = (timeline.options.box && timeline.options.box.align) ?
         timeline.options.box.align : undefined;
 

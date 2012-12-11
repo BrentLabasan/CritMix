@@ -265,17 +265,18 @@ data.push({
         // specify options
         // Date(year, month, day, hours, minutes, seconds, milliseconds)
         var options = {
-          "axisOnTop": true,
-          "editable": true,
-          "width":  "100%", 
-          "height": "300px", 
-          "style": "box",
+          axisOnTop: true,
+          editable: true,
+          width:  "100%", 
+          height: "300px", 
+          style: "box",
+          boxAlign: "left",
           "intervalMin": {{ duration }},
           "intervalMax": {{ duration }},
           "min": new Date(2012, 5, 2,0,0,0), // 
           "max": new Date(2012, 5, 2,0,0,{{ duration }}/1000),
           "showCustomTime": true,
-          "boxAlign": "left"
+          
           //"scale": "SCALE.YEAR",
           //"step": "5",
           //"zoomable": true,
