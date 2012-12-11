@@ -5,7 +5,6 @@
 <head>
 	<title>{{artist}} - {{ title }} | CritMix</title>
 
-
 <script src="http:////ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
 <script src="http://code.jquery.com/ui/1.9.2/jquery-ui.js"></script>
 <!-- SoundCloud -->
@@ -71,84 +70,57 @@ $(document).ready(function() {
 
   var iframeElement   = document.querySelector('iframe');
   var widget        = SC.Widget(iframeElement);
-  console.log(iframeElement);
-  console.log(widget);
-
-
-  widget.bind(SC.Widget.Events.READY, function() {
-
-    console.log(SC.Widget.Events.PLAY_PROGRESS.currentPosition);
-
-    widget.bind(SC.Widget.Events.PLAY, function() {
-      // get information about currently playing sound
-      widget.getCurrentSound(function(currentSound) { 
-        console.log('sound ' + currentSound.get('') + 'began to play');
-      });
-    });
-
-    // get current level of volume
-    widget.getVolume(function(volume) {
-      console.log('current volume value is ' + volume);
-    });
-
-    // set new volume level
-    widget.setVolume(50);
-
-  });
-
       
-      // Set callback to run when API is loaded
-      google.setOnLoadCallback(drawVisualization); 
+  // Set callback to run when API is loaded
+  google.setOnLoadCallback(drawVisualization); 
 
-      // Called when the Visualization API is loaded.
-      function drawVisualization() {
-chee = new Date(2012,5,1,0,0);
-        var data = [ {{ jsonData|safe }} ];
+  // Called when the Visualization API is loaded.
+  function drawVisualization() {
+    chee = new Date(2012,5,1,0,0);
+    var data = [ {{ jsonData|safe }} ];
 
-        var options = {
-          axisOnTop: true,
-          editable: true,
-          width:  "100%", 
-          height: "300px", 
-          style: "box",
-          boxAlign: "left",
-          "intervalMin": {{ duration }},
-          "intervalMax": {{ duration }},
-          "min": new Date(2012, 5, 2,0,0,0), // 
-          "max": new Date(2012, 5, 2,0,0,{{ duration }}/1000),
-          "showCustomTime": true,
-        };
+    var options = {
+      axisOnTop: true,
+      editable: true,
+      width:  "100%", 
+      height: "300px", 
+      style: "box",
+      boxAlign: "left",
+      "intervalMin": {{ duration }},
+      "intervalMax": {{ duration }},
+      "min": new Date(2012, 5, 2,0,0,0), // 
+      "max": new Date(2012, 5, 2,0,0,{{ duration }}/1000),
+      "showCustomTime": true,
+    };
 
-        // Instantiate our timeline object.
-        timeline = new links.Timeline(document.getElementById('mytimeline'));
+    // Instantiate our timeline object.
+    timeline = new links.Timeline(document.getElementById('mytimeline'));
         
-        // Draw our timeline with the created data and options 
-        timeline.draw(data, options);
-        timeline.setScale(links.Timeline.StepDate.SCALE.SECOND, 15);
-$(".timeline-axis-text-major").hide();
+    // Draw our timeline with the created data and options 
+    timeline.draw(data, options);
+    timeline.setScale(links.Timeline.StepDate.SCALE.SECOND, 15);
+    $(".timeline-axis-text-major").hide();
 
-// DOESN'T WORK
-$('.timeline-axis-text-minor').each(function() {
-    var scheme = $(this);
-    x = scheme.text();
-    scheme.text("." + x);
-});   
+    // DOESN'T WORK
+    $('.timeline-axis-text-minor').each(function() {
+        var scheme = $(this);
+        x = scheme.text();
+        scheme.text("." + x);
+    });   
 
-$('.timeline-customtime').first().append("<span>wow</span>");
+    //$('.timeline-customtime').first().append("<span>wow</span>");
 
-      }
+  } // drawVisualization
 
 
 
-widget.bind(SC.Widget.Events.PLAY_PROGRESS, function(currentPosition) {
-var secs = currentPosition.currentPosition/1000 ;
-$('#holder_seconds').text(secs.toFixed(1)); // works
-timeline.setCustomTime(new Date(2012,5,2,0,0,0,currentPosition.currentPosition));
-//$('#holder_seconds').text( $('.timeIndicator__current').text() ); // span becomes blank
-}); // PLAY_PROGRESS
+  widget.bind(SC.Widget.Events.PLAY_PROGRESS, function(currentPosition) {
+    var secs = currentPosition.currentPosition/1000 ;
+    $('#holder_seconds').text(secs.toFixed(1));
+    timeline.setCustomTime(new Date(2012,5,2,0,0,0,currentPosition.currentPosition));
+  }); // PLAY_PROGRESS
 
-document.addEventListener('keyup', function(event) { //http://stackoverflow.com/questions/1349404/generate-a-string-of-5-random-characters-in-javascript/8084248#8084248
-  console.log("event.keyCode " + event.keyCode)
+  document.addEventListener('keyup', function(event) { //http://stackoverflow.com/questions/1349404/generate-a-string-of-5-random-characters-in-javascript/8084248#8084248
     randomID = Math.random().toString(36).substr(2, 5) ;
     while (critList[randomID]) { // if there's already a Crit with that ID, generate a new randomID
       randomID = Math.random().toString(36).substr(2, 5) ;
@@ -189,12 +161,10 @@ document.addEventListener('keyup', function(event) { //http://stackoverflow.com/
         break;
       default:
         return false;
-        break;
-        
+        break;     
     }
-});
 
-
+  });
 
 }); // .ready
 
