@@ -66,6 +66,16 @@ function makeCrit(id, critType, timePosition, comment) {
 
   timeline.addItem(props); // properties is an Object, containing parameters start (Date), end (Date), content (String), group (String). Parameters end and group are optional.
 
+  $(':radio').click(function(){
+      $(this).attr("checked", true);
+      //alert( $(this).attr("id").substr(0,5) ) ;
+      if ( $(this).hasClass('tooloud') ) {
+        $(this).siblings('.toosoft').attr("checked", false);
+      } else {
+        $(this).siblings('.tooloud').attr("checked", false);
+      }   
+    });
+
 } //func makeCrit
 
 $(document).ready(function() {
@@ -119,8 +129,7 @@ $(document).ready(function() {
         $(this).siblings('.toosoft').attr("checked", false);
       } else {
         $(this).siblings('.tooloud').attr("checked", false);
-      }
-      
+      }   
     });
 
   } // drawVisualization
