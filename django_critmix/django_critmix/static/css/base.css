@@ -42,6 +42,9 @@ padding: 10px;
 background-color: blue;
 margin: 0px;
 }
+#critButtons li:hover {
+background-color: grey;
+}
 #controlButtons {
 float: left;
 }
@@ -50,6 +53,9 @@ display: inline;
 list-style-type: none;
 padding: 10px;
 background-color: purple;
+}
+#controlButtons li:hover {
+background-color: grey;
 }
 #saveButton {
 float: left;
@@ -76,10 +82,17 @@ list-style-type: none;
 margin: 10px 5px 5px 15px;
 }
 
-#holder_seconds {
-	color:white;
-font-weight: bold;
+
+#positionIndicator{
+	float:left;
+}
+#positionIndicator li{
+	display: inline;
+list-style-type: none;
+padding: 10px;
 background-color: purple;
-height: 30px;
+}
+#holder_seconds {
+background-color: purple;
 
 }
