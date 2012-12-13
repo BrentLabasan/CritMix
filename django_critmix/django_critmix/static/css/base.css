@@ -20,10 +20,12 @@ a:link {color: #707070; text-decoration:none;}
 a:visited {color: #707070; text-decoration:none;}
 a:hover {color: #cccccc; text-decoration:none;}
 a:active {color: #cccccc; text-decoration:none;}
-.button {
+.interface {
 color: white;
 font-size: 13px;
 font-weight: bold;
+}
+.button {
 cursor: pointer;
 }
 #mytimeline {
