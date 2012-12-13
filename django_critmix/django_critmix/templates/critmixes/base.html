@@ -60,7 +60,7 @@ function makeCrit(id, critType, timePosition, comment) {
 
   var props = {
   'start': new Date(2012,5,2,0,0,timePosition),
-  'content': comment + "<br/><form><input type=radio name=volume id=" + id + "-loud><label for=" + id + "-loud>Too Loud?</label><input type=radio name=volume id=" + id + "-soft><label for=" + id + "-soft>Too Soft?</label></form>" // works, save button works
+  'content': comment + "<br/><form><input type=radio name=volume id=" + id + "-tooloud class=tooloud><label for=" + id + "-loud>Too Loud?</label><input type=radio name=volume id=" + id + "-toosoft class=toosoft><label for=" + id + "-soft>Too Soft?</label></form>" // works, save button works
   };
   console.log(props.content)
 
@@ -115,8 +115,12 @@ $(document).ready(function() {
     $(':radio').click(function(){
       $(this).attr("checked", true);
       //alert( $(this).attr("id").substr(0,5) ) ;
-
-      //>$(this).parent().children()
+      if ( $(this).hasClass('tooloud') ) {
+        $(this).siblings('.toosoft').attr("checked", false);
+      } else {
+        $(this).siblings('.tooloud').attr("checked", false);
+      }
+      
     });
 
   } // drawVisualization
