@@ -17,7 +17,23 @@
 
 <script type="text/javascript">
 
-function savecrits(txt) {
+function savecrits() {
+
+txt = "";
+for (i = 0; i < timeline.getData().length; i++) {
+  txt += "{";
+  txt += "'id': \'" + timeline.getData()[i].id + "\'";
+  txt += ",";
+  txt += "'start': new Date(" + timeline.getData()[i].start.getTime() + ")";
+  txt += ",";
+  homer = $("#" + timeline.getData()[i].id + "-tooloud").parent().parent().html() ;
+  txt += "'content': \'" + homer + "\'";
+  console.log(homer) ;
+  txt += "},";
+}
+
+//alert(txt);
+
   $.getJSON("/savecrits/", { pk:{{ critmixID }}, jsonData: txt });
 
   $('.timeline-axis-text-minor').each(function() {
@@ -29,15 +45,8 @@ function savecrits(txt) {
 
 function addClickHandlers() {
   $("#button_save").click( function() { 
-    txt = "";
-    for (i = 0; i < timeline.getData().length; i++) {
-      txt += "{";
-      txt += "'start': new Date(" + timeline.getData()[i].start.getTime() + ")";
-      txt += ",";
-      txt += "'content': \'" + timeline.getData()[i].content + "\'";
-      txt += "},";
-    }
-    savecrits(txt);
+    
+    savecrits();
   });
 }
 
@@ -48,7 +57,7 @@ var timeline;
 var critList = new Object(); // doesn't work when placed in document.ready, weird!
 
 function makeCrit(id, critType, timePosition, comment) {
-  console.log(timePosition + " " + critType + " " + comment);
+  //console.log(timePosition + " " + critType + " " + comment);
   critList[randomID] = {
     id: id,
     critType: critType,
@@ -59,10 +68,11 @@ function makeCrit(id, critType, timePosition, comment) {
   $(".critType" + critType).effect("highlight");
 
   var props = {
+  'id': id,
   'start': new Date(2012,5,2,0,0,timePosition),
   'content': comment + "<br/><form><input type=radio name=volume id=" + id + "-tooloud class=tooloud><label for=" + id + "-tooloud>Too Loud?</label><input type=radio name=volume id=" + id + "-toosoft class=toosoft><label for=" + id + "-toosoft>Too Soft?</label></form>" // works, save button works
   };
-  console.log(props.content)
+  //console.log(props.content)
 
   timeline.addItem(props); // properties is an Object, containing parameters start (Date), end (Date), content (String), group (String). Parameters end and group are optional.
 
