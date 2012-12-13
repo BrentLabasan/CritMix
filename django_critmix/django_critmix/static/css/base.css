@@ -7,7 +7,7 @@ margin: 0 15px 25px 15px;
 }
 
 #sectionTimeline{
-margin: 0 15px 0 15px;
+margin: 0 15px 70px 15px;
 }
 ul{
 	margin:0; padding:0; 
@@ -33,7 +33,6 @@ cursor: pointer;
 }
 #critButtons {
 float: left;
-margin-bottom: 20px;
 }
 #critButtons li{
 display: inline;
