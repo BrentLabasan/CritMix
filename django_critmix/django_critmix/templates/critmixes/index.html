@@ -1,9 +1,17 @@
+{% extends "site/base.html" %}
+
+{% load staticfiles %}
+
+{% block content %}  
+
 {% if latest_critmix_list %}
     <ul>
     {% for critmix in latest_critmix_list %}
-        <li><a href="/critmixes/{{ critmix.id }}/">{{ critmix.id }} {{ critmix.mix_url }}</a></li>
+        <li><a href="/critmixes/{{ critmix.id }}/">ID {{ critmix.id }} URL {{ critmix.mix_url }}</a></li>
     {% endfor %}
     </ul>
 {% else %}
     <p>No critmixes are available.</p>
 {% endif %}
+
+{% endblock %}
