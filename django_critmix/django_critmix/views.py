@@ -14,3 +14,8 @@ def home(request):
 def about(request):
     #latest_critmix_list = Critmix.objects.all()
     return render_to_response('site/about.html')
+
+def getasongcritiqued(request):
+    #latest_critmix_list = Critmix.objects.all()
+    return render_to_response('site/getasongcritiqued.html')
+    
