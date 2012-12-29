@@ -1,0 +1,224 @@
+{% load staticfiles %}
+<!DOCTYPE HTML>
+<html lang="en">
+<html>
+<head>
+	<title>{{artist}} - {{ title }} | CritMix</title>
+
+<script src="http:////ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+<script src="http://code.jquery.com/ui/1.9.2/jquery-ui.js"></script>
+<!-- SoundCloud -->
+<script src="http://connect.soundcloud.com/sdk.js"></script>
+<script src="http://w.soundcloud.com/player/api.js" type="text/javascript"></script>
+<!-- Almende Timeline -->
+<script type="text/javascript" src="http://www.google.com/jsapi"></script>
+<script src="{% static "timeline-2.3.2/timeline.js" %}" type="text/javascript"></script>
+<link rel="stylesheet" type="text/css" href="{% static "timeline-2.3.2/timeline.css" %}">
+
+<script type="text/javascript">
+
+function savecrits() {
+
+txt = "";
+for (i = 0; i < timeline.getData().length; i++) {
+  txt += "{";
+  txt += "'id': \'" + timeline.getData()[i].id + "\'";
+  txt += ",";
+  txt += "'start': new Date(" + timeline.getData()[i].start.getTime() + ")";
+  txt += ",";
+  homer = $("#" + timeline.getData()[i].id + "-tooloud").parent().parent().html() ;
+  txt += "'content': \'" + homer + "\'";
+  console.log(homer) ;
+  txt += "},";
+}
+
+//alert(txt);
+
+  $.getJSON("/savecrits/", { pk:{{ critmixID }}, jsonData: txt });
+
+  $('.timeline-axis-text-minor').each(function() {
+    var scheme = $(this);
+    x = scheme.text();
+    scheme.text("." + x);
+  });
+}
+
+function addClickHandlers() {
+  $("#button_save").click( function() { 
+    
+    savecrits();
+  });
+}
+
+
+$(document).ready(addClickHandlers);
+
+var timeline;
+var critList = new Object(); // doesn't work when placed in document.ready, weird!
+
+function makeCrit(id, critType, timePosition, comment) {
+  //console.log(timePosition + " " + critType + " " + comment);
+  critList[randomID] = {
+    id: id,
+    critType: critType,
+    timePosition: timePosition,
+    comment: comment + "ham"
+  } 
+
+  $(".critType" + critType).effect("highlight");
+
+  var props = {
+  'id': id,
+  'start': new Date(2012,5,2,0,0,timePosition),
+  'content': comment + "<br/><form><input type=radio name=volume id=" + id + "-tooloud class=tooloud><label for=" + id + "-tooloud>Too Loud?</label><input type=radio name=volume id=" + id + "-toosoft class=toosoft><label for=" + id + "-toosoft>Too Soft?</label></form>" // works, save button works
+  };
+  //console.log(props.content)
+
+  timeline.addItem(props); // properties is an Object, containing parameters start (Date), end (Date), content (String), group (String). Parameters end and group are optional.
+
+  $(':radio').click(function(){
+      $(this).attr("checked", true);
+      //alert( $(this).attr("id").substr(0,5) ) ;
+      if ( $(this).hasClass('tooloud') ) {
+        $(this).siblings('.toosoft').attr("checked", false);
+      } else {
+        $(this).siblings('.tooloud').attr("checked", false);
+      }   
+    });
+
+} //func makeCrit
+
+$(document).ready(function() {
+
+  var iframeElement   = document.querySelector('iframe');
+  var widget        = SC.Widget(iframeElement);
+      
+  // Set callback to run when API is loaded
+  google.setOnLoadCallback(drawVisualization); 
+
+  // Called when the Visualization API is loaded.
+  function drawVisualization() {
+    chee = new Date(2012,5,1,0,0);
+    var data = [ {{ jsonData|safe }} ];
+
+    var options = {
+      axisOnTop: true,
+      editable: true,
+      width:  "100%", 
+      height: "300px", 
+      style: "box",
+      boxAlign: "left",
+      "intervalMin": {{ duration }},
+      "intervalMax": {{ duration }},
+      "min": new Date(2012, 5, 2,0,0,0), // 
+      "max": new Date(2012, 5, 2,0,0,{{ duration }}/1000),
+      "showCustomTime": true,
+    };
+
+    // Instantiate our timeline object.
+    timeline = new links.Timeline(document.getElementById('mytimeline'));
+        
+    // Draw our timeline with the created data and options 
+    timeline.draw(data, options);
+    timeline.setScale(links.Timeline.StepDate.SCALE.SECOND, 15);
+    $(".timeline-axis-text-major").hide();
+
+    // DOESN'T WORK
+    $('.timeline-axis-text-minor').each(function() {
+        var scheme = $(this);
+        x = scheme.text();
+        scheme.text("." + x);
+    });   
+
+    //$('.timeline-customtime').first().append("<span>wow</span>");
+
+    $(':radio').click(function(){
+      $(this).attr("checked", true);
+      //alert( $(this).attr("id").substr(0,5) ) ;
+      if ( $(this).hasClass('tooloud') ) {
+        $(this).siblings('.toosoft').attr("checked", false);
+      } else {
+        $(this).siblings('.tooloud').attr("checked", false);
+      }   
+    });
+
+  } // drawVisualization
+
+
+
+  widget.bind(SC.Widget.Events.PLAY_PROGRESS, function(currentPosition) {
+    var secs = currentPosition.currentPosition/1000 ;
+    $('#holder_seconds').text(secs.toFixed(1));
+    timeline.setCustomTime(new Date(2012,5,2,0,0,0,currentPosition.currentPosition));
+  }); // PLAY_PROGRESS
+
+  document.addEventListener('keyup', function(event) { //http://stackoverflow.com/questions/1349404/generate-a-string-of-5-random-characters-in-javascript/8084248#8084248
+    randomID = Math.random().toString(36).substr(2, 5) ;
+    while (critList[randomID]) { // if there's already a Crit with that ID, generate a new randomID
+      randomID = Math.random().toString(36).substr(2, 5) ;
+    }
+    currTime = $('#holder_seconds').text()
+
+    switch (event.keyCode) {
+      case 65:
+        critType = 20;
+        break;
+      case 83:
+        critType = 10;
+        break;
+      case 68:
+        critType = 11;
+        break;
+      case 70:
+        critType = 12;
+        break;
+      default:
+        return false;
+        break;
+    }
+
+    switch (critType) {
+      case 20:
+        // makeCrit(id, critType, timePosition, comment)
+        makeCrit(randomID, 20, currTime, 'Vocals')
+        break;
+      case 10:
+        makeCrit(randomID, 10, currTime, 'Bass')
+        break;
+      case 11:
+        makeCrit(randomID, 11, currTime, 'Mids')
+        break;
+      case 12:
+        makeCrit(randomID, 12, currTime, 'Treble')
+        break;
+      default:
+        return false;
+        break;     
+    }
+
+  });
+
+
+
+}); // .ready
+
+
+
+
+
+</script>
+<script src="{% static "js/base.js" %}" type="text/javascript"></script>
+<link rel="stylesheet" type="text/css" href="{% static "css/base.css" %}">
+</head>
+<body>
+<nav>
+<ul id="site_nav">
+	<li><a href="/">HOME</a></li>
+	<li><a href="/getasongcritiqued">GET A SONG CRITIQUED</a></li>
+	<li><a href="/critmixes">ALL CRITMIXES</a></li>
+	<li><a href="/about">ABOUT</a></li>
+</ul>
+</nav>
+{% block content %}{% endblock %}
+</body>
+</html>
