@@ -7,6 +7,7 @@ admin.autodiscover()
 urlpatterns = patterns('',
     # Examples:
     url(r'^$', 'django_critmix.views.home'),
+    url(r'^about/$', 'django_critmix.views.about'),
     # url(r'^django_critmix/', include('django_critmix.foo.urls')),
 
     url(r'^critmixes/$', 'critmixes.views.index'),
