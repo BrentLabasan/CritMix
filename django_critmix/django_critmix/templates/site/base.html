@@ -70,7 +70,7 @@ function makeCrit(id, critType, timePosition, comment) {
   var props = {
   'id': id,
   'start': new Date(2012,5,2,0,0,timePosition),
-  'content': comment + "<br/><form><input type=radio name=volume id=" + id + "-tooloud class=tooloud><label for=" + id + "-tooloud>Too Loud?</label><input type=radio name=volume id=" + id + "-toosoft class=toosoft><label for=" + id + "-toosoft>Too Soft?</label></form>" // works, save button works
+  'content': comment + "<br/><form><input type=radio name=volume id=" + id + "-tooloud class=tooloud><label for=" + id + "-tooloud>Too Loud?</label><input type=radio name=volume id=" + id + "-toosoft class=toosoft><label for=" + id + "-toosoft>Too Soft?</label></br><input type=checkbox name=muddy id=" + id + "-muddy>Muddy?</br><span id=" + id + "-comment contenteditable=true style=z-index:9999999>Comment?</span></form>" // works, save button works
   };
   //console.log(props.content)
 
@@ -85,6 +85,20 @@ function makeCrit(id, critType, timePosition, comment) {
         $(this).siblings('.tooloud').attr("checked", false);
       }   
     });
+
+
+  $(':checkbox').click(function(){
+    if ( document.getElementById(id + "-muddy").checked == true ) {
+      $(this).attr("checked", "") ;
+    } else {
+      $(this).removeAttr("checked") ;
+    }
+  });
+
+  $('span').click(function(){
+    //alert("taco"); // works
+    $(this).focus();
+  });
 
 } //func makeCrit
 
@@ -141,6 +155,21 @@ $(document).ready(function() {
         $(this).siblings('.tooloud').attr("checked", false);
       }   
     });
+
+    $(':checkbox').click(function(){
+    if ( this.checked == true ) {
+      //alert("true");
+      $(this).attr("checked", "") ;
+    } else {
+      //alert("false");
+      $(this).removeAttr("checked") ;
+    }
+  });
+
+    $("span").click(function(){
+    //alert("taco"); // 
+    $(this).focus();
+  });
 
   } // drawVisualization
 
