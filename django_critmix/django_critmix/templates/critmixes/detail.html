@@ -1,44 +1,39 @@
-{% extends "critmixes/base.html" %}
+{% extends "site/base.html" %}
 
 {% load staticfiles %}
-<html>
-
-<body>
 
 {% block content %}  
 
 <section id="sectionSoundCloud">
-<h1><a href="{{ critmix }}" target="_blank">{{ title }} by {{artist}}</a></h1>
-
+<h1><a href="{{ critmix }}" target="_blank">{{ title }} <span style="color: #999999">by</span> {{artist}}</a></h1>
 <div id="SCholder">{{ embed_info|safe }}</div>
-<div>
 </section>
 
-<section id="sectionTimeline">
-<ul class="CMixMenu" id="critButtons">
-<li id="" class="button critType20">(A) VOCALS</li>
-<li id="" class="button critType10">(S) BASS</li>
-<li id="" class="button critType11">(D) MID</li>
-<li id="" class="button critType12">(F) TREBLE</li>
+<menu id="sectionTimeline">
 
-<!--
-<li id="" class="button">(J) Kick Drum</li>
-<li id="" class="button">(K) Snare Drum</li>
-<li id="" class="button">(L) Section Transition</li>
-<li id="" class="button">(;) Subbass</li>
--->
-</ul>
-<ul class="CMixMenu" id="controlButtons">
-<li id="" class="button">BACKWARD</li>
-<li id="" class="button">PLAY PAUSE</li>
-<li id="" class="button">FOWARD</li>
-<li id="" class="button">POSITION: <span id="holder_seconds">0.0</span></li>
+<!-- <div style="background-color: yellow; float: left">
+<span style="float: left;">CRITIQUE</span>
+ --> 
+
+<ul class="CMixMenu" id="critButtons">
+<li id="" class="button interface critType20">VOCALS</li>
+<li id="" class="button interface critType10">BASS</li>
+<li id="" class="button interface critType11">MID</li>
+<li id="" class="button interface critType12">TREBLE</li>
 </ul>
 <ul class="CMixMenu" id="saveButton">
-<li id="button_save" class="button">SAVE</li>
+<li id="button_save" class="button interface">SAVE</li>
 </ul>
+<ul class="CMixMenu" id="controlButtons">
+<li id="" class="button interface">&lt;&lt;</li>
+<li id="" class="button interface">PLAY PAUSE</li>
+<li id="" class="button interface">&gt;&gt;</li>
+</ul>
+<ul class="CMixMenu" id="positionIndicator">
+<li id="" class="interface">POSITION: <span id="holder_seconds">0.0</spn></li>
+</ul>
+</menu>
 
-</div>
 
 <div id="critsHolder">
 
@@ -48,6 +43,3 @@
 </section>
 
 {% endblock %}
-
-</body>
-</html>

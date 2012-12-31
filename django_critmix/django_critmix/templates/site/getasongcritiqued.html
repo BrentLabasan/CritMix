@@ -1,0 +1,17 @@
+{% extends "site/base.html" %}
+
+{% load staticfiles %}
+
+{% block content %}  
+<h1>
+Get Your Song Critiqued
+</h1>
+<p>The interface for letting the public to get their song critiqued is a current work in progress.</p>
+<ol>
+	<li>An artist inputs the SoundCloud URL of their song.</li>
+	<li>A CritMix URL is generated for that song.</li>
+	<li>Artist sends that CritMix URL to people he wants to critique the song.</li>
+	<li>Each person's critique has a unique URL. They are asked to provide their name when critiquing, for identifications purposes.</li>
+	<li>The artist is shown a table showing all the unique urls.</li>
+</ol>
+{% endblock %}
