@@ -88,9 +88,6 @@ function makeCrit(id, critType, timePosition, comment) {
 
 
   $(':checkbox').click(function(){
-    // after Saving Crits, none of this works any more
-    alert("moo");
-    /*
     if ( document.getElementById(id + "-muddy").checked == true ) {
       alert("true");
       $(this).attr("checked", "") ;
@@ -98,7 +95,6 @@ function makeCrit(id, critType, timePosition, comment) {
       alert("false");
       $(this).removeAttr("checked") ;
     }
-    */
   });
 
 } //func makeCrit
@@ -156,6 +152,16 @@ $(document).ready(function() {
         $(this).siblings('.tooloud').attr("checked", false);
       }   
     });
+
+    $(':checkbox').click(function(){
+    if ( this.checked == true ) {
+      alert("true");
+      $(this).attr("checked", "") ;
+    } else {
+      alert("false");
+      $(this).removeAttr("checked") ;
+    }
+  });
 
   } // drawVisualization
 
