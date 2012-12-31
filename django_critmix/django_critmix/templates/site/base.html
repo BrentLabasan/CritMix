@@ -88,10 +88,12 @@ function makeCrit(id, critType, timePosition, comment) {
 
 
   $(':checkbox').click(function(){
-    if ( $(this).attr("checked") ) {
-      alert("true") ;
+    if ( document.getElementById(id + "-muddy").checked == true ) {
+      alert("true");
+      //$(this).attr("checked", "") ;
     } else {
-      alert("false") ;
+      alert("false");
+      //$(this).removeAttr("checked") ;
     }
   });
 
