@@ -209,6 +209,7 @@ $(document).ready(function() {
     timeline.setCustomTime(new Date(2012,5,2,0,0,0,currentPosition.currentPosition));
   }); // PLAY_PROGRESS
 
+/* using ASDF to activate Crit buttons is taken out on Dec 31, 2012, b/c it's not a good User Experience
   document.addEventListener('keyup', function(event) { //http://stackoverflow.com/questions/1349404/generate-a-string-of-5-random-characters-in-javascript/8084248#8084248
     randomID = Math.random().toString(36).substr(2, 5) ;
     while (critList[randomID]) { // if there's already a Crit with that ID, generate a new randomID
@@ -253,8 +254,8 @@ $(document).ready(function() {
         break;     
     }
 
-  });
-
+}); // add event listener keyup, for using ASDF to activate Crit buttons
+*/
 
 
 }); // .ready
