@@ -17,6 +17,9 @@
 
 <script type="text/javascript">
 
+var playclicked = false;
+var sec=0;
+
 function savecrits() {
 
 txt = "";
@@ -44,12 +47,11 @@ for (i = 0; i < timeline.getData().length; i++) {
 }
 
 function addClickHandlers() {
-  $("#button_save").click( function() { 
+  $("#button-save").click( function() { 
     
     savecrits();
   });
 }
-
 
 $(document).ready(addClickHandlers);
 
@@ -70,7 +72,7 @@ function makeCrit(id, critType, timePosition, comment) {
   var props = {
   'id': id,
   'start': new Date(2012,5,2,0,0,timePosition),
-  'content': comment + "<br/><form><input type=radio name=volume id=" + id + "-tooloud class=tooloud><label for=" + id + "-tooloud>Too Loud?</label><input type=radio name=volume id=" + id + "-toosoft class=toosoft><label for=" + id + "-toosoft>Too Soft?</label></br><input type=checkbox name=muddy id=" + id + "-muddy>Muddy?</br><span id=" + id + "-comment contenteditable=true style=z-index:9999999>Comment?</span></form>" // works, save button works
+  'content': comment + "<br/><form><input type=radio name=volume id=" + id + "-tooloud class=tooloud><label for=" + id + "-tooloud>Too Loud?</label><input type=radio name=volume id=" + id + "-toosoft class=toosoft><label for=" + id + "-toosoft>Too Soft?</label></br><input type=checkbox name=muddy id=" + id + "-muddy>Muddy?</br><span class=comment id=" + id + "-comment contenteditable=true style=z-index:9999999>Comment?</span></form>" // works, save button works
   };
   //console.log(props.content)
 
@@ -157,30 +159,112 @@ $(document).ready(function() {
     });
 
     $(':checkbox').click(function(){
-    if ( this.checked == true ) {
-      //alert("true");
-      $(this).attr("checked", "") ;
-    } else {
-      //alert("false");
-      $(this).removeAttr("checked") ;
-    }
-  });
+      if ( this.checked == true ) {
+        //alert("true");
+        $(this).attr("checked", "") ;
+      } else {
+        //alert("false");
+        $(this).removeAttr("checked") ;
+      }
+    });
 
     $("span").click(function(){
-    //alert("taco"); // 
-    $(this).focus();
-  });
+      //alert("taco"); // 
+      $(this).focus();
+    });
+
+    $('.button').click(function(){
+      $(this).effect("highlight");
+    });    
+
+    function makeRandomID() {
+      randomID = Math.random().toString(36).substr(2, 5) ;
+      while (critList[randomID]) { // if there's already a Crit with that ID, generate a new randomID
+        randomID = Math.random().toString(36).substr(2, 5) ;
+      }
+      return randomID;
+    }
+
+    $('#button-critvocals').click(function(){
+      currTime = $('#holder_seconds').text()
+      makeCrit(makeRandomID(), 20, currTime, 'Vocals');
+    });
+    $('#button-critbass').click(function(){
+      currTime = $('#holder_seconds').text()
+      makeCrit(makeRandomID(), 10, currTime, 'Bass')
+    });
+    $('#button-critmid').click(function(){
+      currTime = $('#holder_seconds').text()
+      makeCrit(makeRandomID(), 11, currTime, 'Mids')
+    });
+    $('#button-crittreble').click(function(){
+      currTime = $('#holder_seconds').text()
+      makeCrit(makeRandomID(), 12, currTime, 'Treble')
+    });
+
+    $('#button-play').click(function(){
+      playclicked = true;
+      widget.play();
+      $(this).html("PAUSE");
+    });
+
 
   } // drawVisualization
 
 
 
   widget.bind(SC.Widget.Events.PLAY_PROGRESS, function(currentPosition) {
-    var secs = currentPosition.currentPosition/1000 ;
+    $('#button-play').unbind('click');
+    $('#button-play').click(function(){
+      widget.pause();
+      $(this).effect("highlight");
+      $(this).html("PLAY");
+    });
+
+    //dynamically updates the time in the box
+    secs = currentPosition.currentPosition/1000 ;
     $('#holder_seconds').text(secs.toFixed(1));
     timeline.setCustomTime(new Date(2012,5,2,0,0,0,currentPosition.currentPosition));
+
+    $('#button-seekbackward').unbind('click');
+    $('#button-seekbackward').click(function(){
+      widget.seekTo(currentPosition.currentPosition-10000);
+      $(this).effect("highlight");
+      //alert(currentPosition.currentPosition)
+    });
+    $('#button-seekforward').unbind('click');
+    $('#button-seekforward').click(function(){
+      widget.seekTo(currentPosition.currentPosition+10000);
+      $(this).effect("highlight");
+      //alert(currentPosition.currentPosition)
+    });
+
   }); // PLAY_PROGRESS
 
+  widget.bind(SC.Widget.Events.PAUSE, function(currentPosition) {
+    $('#button-play').unbind('click');
+    $('#button-play').click(function(){
+      widget.play();
+      $(this).effect("highlight");
+      $(this).html("PAUSE");
+    });
+  }); // PAUSE
+
+  widget.bind(SC.Widget.Events.READY, function(currentPosition) {
+    
+/*
+    $('#button-seekbackward').click(function(){
+      alert(currentPosition.currentPosition);
+      //widget.seekTo(widget.getPosition()-100);
+    });
+    $('#button-seekforward').click(function(){
+      
+    });
+*/
+
+  }); // READY
+
+/* using ASDF to activate Crit buttons is taken out on Dec 31, 2012, b/c it's not a good User Experience
   document.addEventListener('keyup', function(event) { //http://stackoverflow.com/questions/1349404/generate-a-string-of-5-random-characters-in-javascript/8084248#8084248
     randomID = Math.random().toString(36).substr(2, 5) ;
     while (critList[randomID]) { // if there's already a Crit with that ID, generate a new randomID
@@ -225,8 +309,8 @@ $(document).ready(function() {
         break;     
     }
 
-  });
-
+}); // add event listener keyup, for using ASDF to activate Crit buttons
+*/
 
 
 }); // .ready
