@@ -208,10 +208,21 @@ $(document).ready(function() {
 
 
   widget.bind(SC.Widget.Events.PLAY_PROGRESS, function(currentPosition) {
+    $('#button-play').unbind('click');
+    $('#button-play').click(function(){
+      widget.pause();
+    });
     var secs = currentPosition.currentPosition/1000 ;
     $('#holder_seconds').text(secs.toFixed(1));
     timeline.setCustomTime(new Date(2012,5,2,0,0,0,currentPosition.currentPosition));
   }); // PLAY_PROGRESS
+
+  widget.bind(SC.Widget.Events.PAUSE, function(currentPosition) {
+    $('#button-play').unbind('click');
+    $('#button-play').click(function(){
+      widget.play();
+    });
+  }); // PAUSE
 
 /* using ASDF to activate Crit buttons is taken out on Dec 31, 2012, b/c it's not a good User Experience
   document.addEventListener('keyup', function(event) { //http://stackoverflow.com/questions/1349404/generate-a-string-of-5-random-characters-in-javascript/8084248#8084248
