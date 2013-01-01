@@ -187,13 +187,16 @@ $(document).ready(function() {
       makeCrit(makeRandomID(), 20, currTime, 'Vocals');
     });
     $('#button-critbass').click(function(){
-      alert('a');
+      currTime = $('#holder_seconds').text()
+      makeCrit(makeRandomID(), 10, currTime, 'Bass')
     });
     $('#button-critmid').click(function(){
-      alert('a');
+      currTime = $('#holder_seconds').text()
+      makeCrit(makeRandomID(), 11, currTime, 'Mids')
     });
     $('#button-crittreble').click(function(){
-      alert('a');
+      currTime = $('#holder_seconds').text()
+      makeCrit(makeRandomID(), 12, currTime, 'Treble')
     });
 
   } // drawVisualization
