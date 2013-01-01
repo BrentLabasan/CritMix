@@ -157,19 +157,32 @@ $(document).ready(function() {
     });
 
     $(':checkbox').click(function(){
-    if ( this.checked == true ) {
-      //alert("true");
-      $(this).attr("checked", "") ;
-    } else {
-      //alert("false");
-      $(this).removeAttr("checked") ;
-    }
-  });
+      if ( this.checked == true ) {
+        //alert("true");
+        $(this).attr("checked", "") ;
+      } else {
+        //alert("false");
+        $(this).removeAttr("checked") ;
+      }
+    });
 
     $("span").click(function(){
-    //alert("taco"); // 
-    $(this).focus();
-  });
+      //alert("taco"); // 
+      $(this).focus();
+    });
+
+    $('#button-critvocals').click(function(){
+      alert('a');
+    });
+    $('#button-critbass').click(function(){
+      alert('a');
+    });
+    $('#button-critmid').click(function(){
+      alert('a');
+    });
+    $('#button-crittreble').click(function(){
+      alert('a');
+    });
 
   } // drawVisualization
 
