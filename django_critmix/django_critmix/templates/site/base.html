@@ -202,6 +202,7 @@ $(document).ready(function() {
     $('#button-play').click(function(){
       widget.play();
       $(this).effect("highlight");
+      $(this).html("PAUSE");
     });
 
   } // drawVisualization
@@ -213,7 +214,10 @@ $(document).ready(function() {
     $('#button-play').click(function(){
       widget.pause();
       $(this).effect("highlight");
+      $(this).html("PLAY");
     });
+
+    //dynamically updates the time in the box
     var secs = currentPosition.currentPosition/1000 ;
     $('#holder_seconds').text(secs.toFixed(1));
     timeline.setCustomTime(new Date(2012,5,2,0,0,0,currentPosition.currentPosition));
@@ -224,6 +228,7 @@ $(document).ready(function() {
     $('#button-play').click(function(){
       widget.play();
       $(this).effect("highlight");
+      $(this).html("PAUSE");
     });
   }); // PAUSE
 
