@@ -18,6 +18,7 @@
 <script type="text/javascript">
 
 var playclicked = false;
+var sec=0;
 
 function savecrits() {
 
@@ -207,6 +208,7 @@ $(document).ready(function() {
       $(this).html("PAUSE");
     });
 
+
   } // drawVisualization
 
 
@@ -220,9 +222,18 @@ $(document).ready(function() {
     });
 
     //dynamically updates the time in the box
-    var secs = currentPosition.currentPosition/1000 ;
+    secs = currentPosition.currentPosition/1000 ;
     $('#holder_seconds').text(secs.toFixed(1));
     timeline.setCustomTime(new Date(2012,5,2,0,0,0,currentPosition.currentPosition));
+
+    $('#button-seekbackward').unbind('click');
+    $('#button-seekbackward').click(function(){
+      widget.seekTo(currentPosition.currentPosition-10000);
+    });
+    $('#button-seekforward').click(function(){
+      
+    });
+
   }); // PLAY_PROGRESS
 
   widget.bind(SC.Widget.Events.PAUSE, function(currentPosition) {
@@ -233,6 +244,20 @@ $(document).ready(function() {
       $(this).html("PAUSE");
     });
   }); // PAUSE
+
+  widget.bind(SC.Widget.Events.READY, function(currentPosition) {
+    
+/*
+    $('#button-seekbackward').click(function(){
+      alert(currentPosition.currentPosition);
+      //widget.seekTo(widget.getPosition()-100);
+    });
+    $('#button-seekforward').click(function(){
+      
+    });
+*/
+
+  }); // READY
 
 /* using ASDF to activate Crit buttons is taken out on Dec 31, 2012, b/c it's not a good User Experience
   document.addEventListener('keyup', function(event) { //http://stackoverflow.com/questions/1349404/generate-a-string-of-5-random-characters-in-javascript/8084248#8084248
