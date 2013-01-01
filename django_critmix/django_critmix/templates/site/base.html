@@ -50,7 +50,6 @@ function addClickHandlers() {
   });
 }
 
-
 $(document).ready(addClickHandlers);
 
 var timeline;
@@ -175,8 +174,17 @@ $(document).ready(function() {
       $(this).effect("highlight");
     });    
 
+    function makeRandomID() {
+      randomID = Math.random().toString(36).substr(2, 5) ;
+      while (critList[randomID]) { // if there's already a Crit with that ID, generate a new randomID
+        randomID = Math.random().toString(36).substr(2, 5) ;
+      }
+      return randomID;
+    }
+
     $('#button-critvocals').click(function(){
-      alert('a');
+      currTime = $('#holder_seconds').text()
+      makeCrit(makeRandomID(), 20, currTime, 'Vocals');
     });
     $('#button-critbass').click(function(){
       alert('a');
