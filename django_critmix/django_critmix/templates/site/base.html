@@ -229,9 +229,12 @@ $(document).ready(function() {
     $('#button-seekbackward').unbind('click');
     $('#button-seekbackward').click(function(){
       widget.seekTo(currentPosition.currentPosition-10000);
+      //alert(currentPosition.currentPosition)
     });
+    $('#button-seekforward').unbind('click');
     $('#button-seekforward').click(function(){
-      
+      widget.seekTo(currentPosition.currentPosition+10000);
+      //alert(currentPosition.currentPosition)
     });
 
   }); // PLAY_PROGRESS
