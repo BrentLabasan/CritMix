@@ -70,7 +70,7 @@ function makeCrit(id, critType, timePosition, comment) {
   var props = {
   'id': id,
   'start': new Date(2012,5,2,0,0,timePosition),
-  'content': comment + "<br/><form><input type=radio name=volume id=" + id + "-tooloud class=tooloud><label for=" + id + "-tooloud>Too Loud?</label><input type=radio name=volume id=" + id + "-toosoft class=toosoft><label for=" + id + "-toosoft>Too Soft?</label></br><input type=checkbox name=muddy id=" + id + "-muddy>Muddy?</br><span id=" + id + "-comment contenteditable=true style=z-index:9999999>Comment?</span></form>" // works, save button works
+  'content': comment + "<br/><form><input type=radio name=volume id=" + id + "-tooloud class=tooloud><label for=" + id + "-tooloud>Too Loud?</label><input type=radio name=volume id=" + id + "-toosoft class=toosoft><label for=" + id + "-toosoft>Too Soft?</label></br><input type=checkbox name=muddy id=" + id + "-muddy>Muddy?</br><span class=comment id=" + id + "-comment contenteditable=true style=z-index:9999999>Comment?</span></form>" // works, save button works
   };
   //console.log(props.content)
 

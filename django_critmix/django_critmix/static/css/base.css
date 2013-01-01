@@ -1,3 +1,9 @@
+.comment {
+	border: 1px solid #ADADAD;
+	padding: 0px;
+	margin: 2px;
+}
+
 .CMixMenu {
 	margin: 0 0 0 40px;
 }
