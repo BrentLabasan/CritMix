@@ -201,6 +201,7 @@ $(document).ready(function() {
 
     $('#button-play').click(function(){
       widget.play();
+      $(this).effect("highlight");
     });
 
   } // drawVisualization
@@ -211,6 +212,7 @@ $(document).ready(function() {
     $('#button-play').unbind('click');
     $('#button-play').click(function(){
       widget.pause();
+      $(this).effect("highlight");
     });
     var secs = currentPosition.currentPosition/1000 ;
     $('#holder_seconds').text(secs.toFixed(1));
@@ -221,6 +223,7 @@ $(document).ready(function() {
     $('#button-play').unbind('click');
     $('#button-play').click(function(){
       widget.play();
+      $(this).effect("highlight");
     });
   }); // PAUSE
 
