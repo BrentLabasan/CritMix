@@ -17,6 +17,8 @@
 
 <script type="text/javascript">
 
+var playclicked = false;
+
 function savecrits() {
 
 txt = "";
@@ -200,8 +202,8 @@ $(document).ready(function() {
     });
 
     $('#button-play').click(function(){
+      playclicked = true;
       widget.play();
-      $(this).effect("highlight");
       $(this).html("PAUSE");
     });
 
