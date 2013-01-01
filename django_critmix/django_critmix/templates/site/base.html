@@ -44,7 +44,7 @@ for (i = 0; i < timeline.getData().length; i++) {
 }
 
 function addClickHandlers() {
-  $("#button_save").click( function() { 
+  $("#button-save").click( function() { 
     
     savecrits();
   });
@@ -197,6 +197,10 @@ $(document).ready(function() {
     $('#button-crittreble').click(function(){
       currTime = $('#holder_seconds').text()
       makeCrit(makeRandomID(), 12, currTime, 'Treble')
+    });
+
+    $('#button-play').click(function(){
+      alert('a');
     });
 
   } // drawVisualization
